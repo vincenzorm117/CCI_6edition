@@ -1,3 +1,3 @@
 # problems
 
-Contains the list of coding challenges that I have done.
+Contains the coding challenges that I have done.
