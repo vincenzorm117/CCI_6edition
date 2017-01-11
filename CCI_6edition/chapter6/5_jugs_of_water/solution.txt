@@ -1,0 +1,12 @@
+We have a 5-quart jug, a 3-quart jug, and unlimited supply of water.
+
+First we have 0 of the 5 quart jug full: 0/5,
+and we have 0 of the 3 quart jug full: 0/3.
+
+Fill 5-qrt jug: 5/5 & 0/3
+Dump 5-qrt in to 3-qrt jug: 2/5 & 3/3
+Dump 3-qrt jug out: 2/5 & 0/3
+Dump 5-qrt into 3-qrt jug: 0/5 & 2/3
+Fill 5-qrt jug: 5/5 & 2/3
+Dump 5-qrt into 3-qrt: 4/5 & 3/3
+Now 5-qrt jug has 4 quarts.

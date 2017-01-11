@@ -1,0 +1,10 @@
+Number the bottles, i for 1 to 20. For bottle i set i pills on to a pile P, and do this bottles 1 to 20. If there were no 1.1 gram pills, there should be 1^2 +2^2 + ... + 20^2 = 20(20 + 1)/2 = 210 grams. But since there 1.1 gram pills we don't know for certain how many grams the scale will read. We now take those pills in pile P use the scale once to get a mass M. Consider the 0.1 gram portion of the 1.1 pills, if we remove the extra 0.1, then M = 210. Hence, M - 210 gives the amount of 0.1's. Let denote that quantity as C. Finally, C / 0.1 gives us a natural number which tells us which bottle contains the 1.1 gram pill bottle.
+
+Formula when the number of pills N = 20:
+
+f_n(x) = (x - [n(n+1)/2]) / 0.1
+
+f_20(x) = (x - 210) / 0.1
+
+Consider 5th bottle has 1.1 pills, then x = 210.5, and we get the following:
+f_20(210.5) = (210.5 - 210) / 0.1 = 0.5 / 0.1 = 5
