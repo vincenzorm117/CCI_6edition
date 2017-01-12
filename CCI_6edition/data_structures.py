@@ -50,42 +50,60 @@ class BitVector:
 ####################################################################################
 ####################################################################################
 
+#!/usr/local/bin/python3
+
+
 class BST:
 	class Node:
 		def __init__(self, data):
 			self.data = data
-			self.left = None
-			self.right = None
+			self.children = [None,None]
 		def __str__(self):
 			return str(self.data)
 
 	def __init__(self):
 		self.root = None
+		self.height = 0
 
 	def insert(self, data):
 		if self.root is None:
+			self.height = 1
 			self.root = self.Node(data)
 			return
 		curr = self.root
-		while True:
-			if data <= curr.data:
-				if curr.left is None:
-					curr.left = self.Node(data)
-					break
-				else:
-					curr = curr.left
+		height = 0
+		while curr is not None:
+			height += 1
+			index = 0 if data <= curr.data else 1
+			if curr.children[index] is None:
+				curr.children[index] = self.Node(data)
+				height += 1
+				break
 			else:
-				if curr.right is None:
-					curr.right = self.Node(data)
-					break
-				else:
-					curr = curr.right
+				curr = curr.children[index]
+		self.height = max(self.height, height)
 
 	def find(self, data):
 		curr = self.root
 		while curr is not None and curr.data != data:
-			curr = curr.left if data <= curr.data else curr.right
-		return curr.data
+			curr = curr.children[0] if data <= curr.data else curr.children[1]
+		return curr
+
+	def pathToNode(self, data):
+		if self.root is None or self.height <= 0:
+			return []
+		path = [None] * self.height
+		q = [(self.root, 0)]
+		while 0 < len(q):
+			c = q.pop()
+			path[c[1]] = c[0]
+			if c[0].data == data:
+				return path[:c[1]+1]
+			if c[0].left is not None:
+				q.append((c[0].left, c[1]+1))
+			if c[0].right is not None:
+				q.append((c[0].right, c[1]+1))
+		return []
 
 	def empty(self):
 		return self.root == None
@@ -98,25 +116,15 @@ class BST:
 		while 0 < len(q):
 			c = q.pop(0)
 			print(c)
-			if c.left is not None:
-				q.append(c.left)
-			if c.right is not None:
-				q.append(c.right)
+			if c.children[0] is not None:
+				q.append(c.children[0])
+			if c.children[1] is not None:
+				q.append(c.children[1])
 		print()
 
-	def height(self):
-		if self.root is None:
-			return 0
-		q = [(0,self.root)]
-		max = 0
-		while 0 < len(q):
-			c = q.pop(0)
-			if max < c[0]:
-				max = c[0]
-			if c[1].left is not None:
-				q.append((c[0]+1, c[1].left))
-			if c[1].right is not None:
-				q.append((c[0]+1, c[1].right))
-		return max+1
+	def remove(self, data):
+		# TODO
+
+
 
 
