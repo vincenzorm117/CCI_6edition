@@ -252,7 +252,7 @@ class BST:
 		q = [self.root]
 		while 0 < len(q):
 			c = q.pop(0)
-			print(c)
+			print(c, end=" ")
 			if c.children[0] is not None:
 				q.append(c.children[0])
 			if c.children[1] is not None:
@@ -274,11 +274,61 @@ class BST:
 			if c.children[1] is not None:
 				if c.children[1].data == node.data:
 					return c
-				q.append(c.children[0])
+				q.append(c.children[1])
 		return None
 		
-	# def remove(self, data):
-		
+	def remove(self, data):
+		def maxSubtreeVal(root):
+			subtreeMax = (-2 ** 64, None)
+			if root is None:
+				return subtreeMax
+			c = root
+			while True:
+				if subtreeMax[0] < c.data:
+					subtreeMax = (c.data, c)
+				if c.children[1] is None:
+					break
+				c = c.children[1]
+			return subtreeMax
+					
+
+		if self.root is None:
+			return None
+		delnode = self.find(data)
+		parent = self.parent(delnode)
+		if delnode is None:
+			return None
+		subtree = (delnode.children[0] is None, delnode.children[1] is None)
+
+		if subtree[0] and subtree[1]:
+			if parent is None:
+				self.root = None
+			elif parent.children[0] == delnode:
+				parent.children[0] = None
+			elif parent.children[1] == delnode:
+				parent.children[1] = None
+			del delnode
+		elif subtree[0]:
+			if parent is None:
+				self.root = delnode.children[1]
+			elif parent.children[0] == delnode:
+				parent.children[0] = delnode.children[1]
+			elif parent.children[1] == delnode:
+				parent.children[1] = delnode.children[1]
+			del delnode
+		elif subtree[1]:
+			if parent is None:
+				self.root = delnode.children[0]
+			elif parent.children[0] == delnode:
+				parent.children[0] = delnode.children[0]
+			elif parent.children[1] == delnode:
+				parent.children[1] = delnode.children[0]
+			del delnode
+		else:
+			self.print()
+			newDelNode = maxSubtreeVal(delnode.children[0])
+			self.remove(newDelNode[0])
+			delnode.data = newDelNode[0]
 
 
 ####################################################################################
