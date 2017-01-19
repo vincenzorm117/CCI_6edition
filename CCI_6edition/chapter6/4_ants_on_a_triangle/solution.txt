@@ -1,0 +1,3 @@
+Consider each ant, each ant has a probability of going left of 0.5 and the same for going right. On a triangle, there are 3 ants and therefore there is a probability of 0.5^3 of all ants going to the right and the same probability of all ants going to the left. Thus we have a probability of 2(0.5)^3 = 0.5^2 of all ants going in the same direction.
+
+This case our polygon has 3 sides, but for an N sized polygon we would 2(0.5)^N or (0.5)^(n-1) percent of all the ants traveling to the same side.
