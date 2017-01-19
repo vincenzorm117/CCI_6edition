@@ -1,0 +1,41 @@
+Lets consider each scenario:
+
+Game 1:
+You only have one shot thus, there is a probability p that you make it.
+
+Game 2:
+Here you have to make at least 2 shots. Notice they say you have 3 shots and you have to make 2 of the 3 shots. That means it is irrelevant if you make all three or not, you just have to make at least 2. Thus we have four scenarios, lets consider the one where we make exactly 2 shots. We can miss the first, second or third shot so that puts us at:
+
+P(p) = (1-p)pp + p(1-p)p + pp(1-p) = 3(1-p)p^2
+
+respectively. Now if we make all three we have a probability of: P(p) = ppp = p^3.
+This gives a total probability of:
+P(p) = p^3 + 3(1-p)p^2 = -2p^3 + 3p^2
+
+Now we compare the two, and their zeros or values of p for which they are equal:
+
+p = -2p^3 + 3p^2
+2p^3 - 3p^2 + p = 0
+p(2p^2 - 3p + 1) = 0, p = 0 is one solution
+p(2p - 1)(p - 1) = 0, p = 1/2, 1 are two other solutions.
+
+Now we know that the values between 0 and 1/2, and 1/2 to 1 exclusive are going to be the range of values of p for which the two games odds will be different.
+
+Consider when Game 1 has higher likely hood then: 
+p > -2p^3 + 3p^2
+1 > -2p^2 + 3p
+2p^2 - 3p + 1 > 0
+(2p - 1)(p - 1) > 0
+p < 1 so p - 1 < 0 
+which means 2p - 1 < 0 and p < 1/2.
+Thus Game 1 is better played when p < 1/2.
+
+If we look at the converse, we find a similar result and that Game 2 is better played when 1/2 < p.
+
+
+
+
+
+
+
+
