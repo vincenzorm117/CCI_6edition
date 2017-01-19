@@ -1,0 +1,38 @@
+(n & (n-1)) == 0 determines if the given number is a power of 2. If you run a loop and test values of n you will notice this is true. 
+Consider n = 32 in an 8 bit 2's complement int,
+
+n = 00100000
+
+n - 1 is:
+    00100000
+ +  11111111
+   100011111
+
+[NOTE on -1]: Look up two's complement
+
+n & (n - 1) is:
+   00100000
+ & 00011111
+   00000000  = 0
+
+How can we be certain that this is only the case for powers of 2? Lets suppose there is a number x such that it is not a power of 2. If that is the case then it must have at least more than one bit being 1. Lets consider the first two 1 bits we encounter when we read the number right to left.
+
+Lets suppose there are 0 <= M1 0 bits leading up the first 1 bit and there are 0 <= M2 bits between the first and second 1 bits. When we AND the first M1 bits we will get zero, until we get to the first 1 bit. Since adding -1 is the same as adding a number with all 1 bits, we have that (n - 1)'s M1+1 bit is zero because n's M1+1 is assumed to be a 1 bit. Now, when we AND those M2 bits between the first and second 1 bits, we know that the M2 bits of n - 1 are going to be zero because 1+1 = 0 with a carry of 1 which will keep carrying until the M2+1 bit which is the second 1 bit. Now the second 1 bit, in adding -1, or the M2+1 bit of n-1 becomes 1+1+1 = 1 with a carry of 1. This 1 bit is the one we need to focus on. When we AND it with n we have a 1 bit in that spot because the M2+1 bit of n is 1, as per our assumption of the structure of n. Hence 0 < n & (n - 1), and n & (n - 1) == 0 is false for all numbers not being a power of 2. See below for an example.
+
+
+n = ... 1 ... 1 ...
+
+
+Lets suppose M1 = 4, M2 = 5, and lets add -1:
+
+   ... 10000010000
+ + 111111111111111
+   ????10000001111
+
+and & it with n
+
+   ... 10000010000
+ & ????10000001111
+   ????10000000000
+
+
