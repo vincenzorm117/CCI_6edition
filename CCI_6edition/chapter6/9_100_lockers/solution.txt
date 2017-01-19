@@ -1,0 +1,8 @@
+Lets observe that this problem is the same as having all lockers closed and for every ith locker i ranging from 1 to 100, it is toggled:
+
+for i in range(1,100+1):
+	for j in range(1,100+1, i)
+		# toggle locker j
+
+Here we can observe that every locker N is toggled by any factor of M of N. Now how many factors does any natural number N have between 1 and 100? We know that for every factor N1 of N there is a another factor N2 such that N1 * N2 = N. Thus N is made of an even number of factors, except when N1 = N2. Thus, only perfect squares have an odd number of factors because N1 = N2 is only counted once. There are 10 perfect square between 1 and 100: 1,4,9,16,25,36,49,64,81,100. 
+Hence, there are 10 open lockers after toggling locker 100.
