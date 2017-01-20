@@ -479,3 +479,15 @@ def genvals(N, alpha):
 		vals = n
 	return n
 
+
+####################################################################################
+# Bitwise functions
+
+def hamming_distance(N):
+	if not isinstance(N, int):
+		return 0
+	count = 0
+	while 0 < N:
+		count += 1
+		N = N & (N - 1)
+	return count
