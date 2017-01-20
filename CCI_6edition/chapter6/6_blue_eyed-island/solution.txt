@@ -1,0 +1,19 @@
+The solution to this problem is based on these essential pieces of information:
+
+1. Everyone know there is at least one person with blue eyes
+2. If there are B individuals with blue eyes then each individual, blue or brown-eyed (remember they don't know), knows there are B or B+1 individuals with blue eyes.
+3. These folks are inteligent enough to deduce what this means, and that their choice is based on how they and their fellow islanders react to the information they have.
+
+Note: Even though it's not as important, it helps to assume that everyone can examine everyone else's eyes before 8:00pm and make a choice to leave or not. Imagine each individual has an iPad of everyone's records except themselves.
+
+Lets explore some cases, for the number of days D:
+Case B = 1
+Every brown-eyed looks around and sees there is one blue-eyed person. That one blue-eyed person looks around and sees there is no blue-eyed person. Blue eyed person immediately knows that they are the blue-eyed person and they take the 8:00pm flight. Hence D = 1.
+
+Case B = 2
+Every brown-eyed person looks around and sees 2 blue-eyed people. Those 2 blue-eyed people look around and see only 1 blue-eyed person. They both stay along with the brown-eyed people, and those 2 realize the next day that the other is still there. At this point, they each know there is at least 1 blue-eyed person but they would have left knowing there is 1 blue-eyed person, so that invididual realizes he/she must have blue eyes. Hence both take the 8:00pm flight, and D = 2. What if we consider a brown-eyed person: that individual sees 2 blue-eyed people and by day 2 both are gone, so that individual knows he/she has brown eyes.
+
+We can then apply the same rule for ant B greater than or equal to 1. That is for B individuals with blue eyes, the blue-eyed people will leave in B days. Lets say each individual sees N blue-eyed people, then they all must follow the rule that in N+1 days they must leave assuming that no one leaves on day N. For the blue-eyed people they will see N = B - 1 blue-eyed people so they will leave on day B, and for brown-eyed people they will leave on day B+1 because they see N = B people. But since, all the blue-eyed people leave on day B, then all the brown-eyed people see this and stay.
+
+
+
