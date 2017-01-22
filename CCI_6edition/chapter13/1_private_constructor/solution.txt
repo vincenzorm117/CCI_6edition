@@ -1,0 +1,1 @@
+The effect of keeping a constructor private in terms of inheritance is that the subclass will not have access to the superclass's private constructor. This enables users to construct code that can be used by others without exposing specific functionality to them. 

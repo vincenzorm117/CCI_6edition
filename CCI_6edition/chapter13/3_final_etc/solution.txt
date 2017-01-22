@@ -1,0 +1,6 @@
+
+The final qualifier declares a variable as being constant, meaning that once the variable is set, it is immutable. This means that if a primitive is set, its value cannot be changed. If the variable is a reference, the reference's fields can be changed but the reference itself for that variable cannot change. Methods with the final qualifier cannot be overriden, and classes with it cannot be subclassed.
+
+finally is a type of block that always runs after a try-catch block, even if the try throws an exception and the catch block is ran. The finally block will hold functionality that always runs in code.
+
+finalize is a function that belongs to the Object class that runs when the class instance is being cleaned up by the garbage collector. If the function is ran, it means the object has no more references to it (its floating in memory). It can be overriden by subclasses to do any cleanup operations. Keep in mind that if the JVM exits for any reason the finally block is not ran.
