@@ -1,0 +1,29 @@
+This problem really got to me, but I managed to get to the same conclusion as the book which when you run a simulation makes sense.
+
+First consider a family with N kids. The probability of a family with N kids following the rule of the queen is P(N) = 0.5^N. Lets break it down.
+
+P(N = 1) = 0.5      // The probability of having no boys
+P(N = 2) = 0.5^2    // The probability of having one boy
+P(N = 3) = 0.5^3    // The probability of having two boys
+...
+P(N) = 0.5^N    // The probability of having N-1 boys
+
+
+This is clearly a Bernouli Trial, but where do we go from here. If you are savvy in the realm of Probability then its obvious to go for the expected value, but in this case I am not and I proceed by running the simulation where after some scrutinous configuration I come to accept that there is a 1/1 ratio between boys and girls in this population, meaning that if we select one of these ospring there is a 50% chance of picking a boy or a girl. It felt like it wasn't true but I ran 10000 simulations with population sizes of 10000 so I considered this idea more.
+
+I proceed to count the number of families with k boys k = 0,1,2,3, ... and I found that their were more families with no boys than any other. In fact, the count of families with no boys f_0 was about twice as much as the number of families with one boy f_1. This property seemed to exist for all families with k boys: f_k = 2 * f_k-1. This is where the lightbulb turned on.
+
+Consider the population of M couples making these ospring. How many do you think are going to have one girl and no boys? Well since the probability of having one girl is 0.5 then half probably have no boys and the other half has a boy, so M * 0.5 = M/2 families have a girl and the other half has boys. Lets ignore the M/2 families that have a girl and move to the M/2 families that have one boy and repeat the experiment with M/2 families that have one boy. Now we have M/4 families that have one boy and one girl and M/4 that have two boys. Do you see the pattern? It is important to clarify that this experiment can be done in this fashion mainly because each instance of the families having a child is independent of one another, so I am stating it here. With this information, how many boys do we have?
+
+We have this many boys:
+
+B = M/2 + M/4 + M/8 + M/16 + M/32 + ....
+    
+    __∞__				__∞__
+B = \     (M / 2^k) = M \	  (1 / 2^k) = M
+    /____ 				/____
+    k = 1				k = 1
+    
+We are guerenteed M girls, so the ratio should be around 1 to 1.
+
+
