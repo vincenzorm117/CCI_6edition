@@ -51,6 +51,158 @@ class BitVector:
 ####################################################################################
 ####################################################################################
 
+class LinkedList:
+	class Node:
+		def __init__(self, data):
+			self.data = data
+			self.next = None
+		def __str__(self):
+			return str(self.data)
+
+	def __init__(self):
+		self.head = None
+		self.tail = None
+		self.count = 0
+
+	def insert(self, data):
+		self.count += 1
+		if self.head is None:
+			self.head = self.tail = self.Node(data)
+			return
+		self.tail.next = self.Node(data)
+		self.tail = self.tail.next
+
+	def find(self, data):
+		curr = self.head
+		while curr is not None and curr.data != data:
+			curr = curr.next
+		return Node if curr is None else curr
+
+	def remove(self, data):
+		def _remove(data):
+			self.count -= 1
+			if self.tail is None:
+				return
+			elif self.tail == self.head and self.tail.data == data:
+				del self.head
+				self.__init__()
+				return
+			elif self.head.data == data:
+				d = self.head
+				self.head = self.head.next
+				del d
+			else:
+				prev = self.head
+				while prev.next is not None and prev.next.data != data:
+					prev = prev.next
+				if prev.next is None:
+					return
+				d = prev.next
+				if prev.next == self.tail:
+					self.tail = prev
+				prev.next = prev.next.next
+				del d
+		if type(self.head.data) == type(data):
+			return _remove(data)
+		elif isinstance(data, (tuple, list)):
+			for l in data:
+				_remove(l)
+		else:
+			return _remove(data)
+
+
+	def print(self):
+		curr = self.head
+		while curr is not None:
+			print(curr, end=" ")
+			curr = curr.next
+		print()
+
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+
+class DoubleLinkedList:
+	class Node:
+		def __init__(self, data):
+			self.data = data
+			self.next = None
+			self.prev = None
+		def __str__(self):
+			return str(self.data)
+
+	def __init__(self):
+		self.head = None
+		self.tail = None
+		self.count = 0
+
+	def insert(self, data):
+		self.count += 1
+		if self.head is None:
+			self.head = self.tail = self.Node(data)
+			return
+		self.tail.next = self.Node(data)
+		self.tail.next.prev = self.tail
+		self.tail = self.tail.next
+
+	def find(self, data):
+		curr = self.head
+		while curr is not None and curr.data != data:
+			curr = curr.next
+		return Node if curr is None else curr
+
+	def remove(self, data):
+		def _remove(data):
+			self.count -= 1
+			if self.tail is None:
+				return
+			elif self.tail == self.head and self.tail.data == data:
+				del self.head
+				self.__init__()
+				return
+			elif self.head.data == data:
+				d = self.head
+				self.head = self.head.next
+				del d
+				self.head.prev = None
+			elif self.tail.data == data:
+				d = self.tail
+				self.tail = self.tail.prev
+				del d
+				self.tail.next = None
+			else:
+				prev = self.head
+				while prev.next is not None and prev.next.data != data:
+					prev = prev.next
+				if prev.next is None:
+					return
+				d = prev.next
+				prev.next = prev.next.next
+				prev.next.prev = prev
+				del d
+		if type(self.head.data) == type(data):
+			return _remove(data)
+		elif isinstance(data, (tuple, list)):
+			for l in data:
+				_remove(l)
+		else:
+			return _remove(data)
+
+
+	def print(self):
+		curr = self.head
+		while curr is not None:
+			print(curr, end=" ")
+			curr = curr.next
+		print()
+
+
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+
 
 class Stack:
 	def __init__(self, size = 16):
@@ -483,6 +635,7 @@ def genvals(N, alpha):
 ####################################################################################
 # Bitwise functions
 
+
 def hamming_distance(N):
 	if not isinstance(N, int):
 		return 0
@@ -491,3 +644,10 @@ def hamming_distance(N):
 		count += 1
 		N = N & (N - 1)
 	return count
+
+
+def power_of_2(N):
+	return (N & (N-1)) == 0
+
+
+
