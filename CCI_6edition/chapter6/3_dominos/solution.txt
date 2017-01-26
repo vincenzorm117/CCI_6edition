@@ -1,0 +1,9 @@
+This problem I have solved before, but upon trying to solve it again I have realized my solution is more of an example. As a mathematician I am not happy with such a solution so I spent many days thinking about it and could not come to the simple and elegant solution the book came up with. Either way here is the solution I came up with which is very difficult to prove when considering more than the examples.
+
+
+So the idea behind this proof is that you cannot fit all dominoes because there is no configuration of the 31 dominoes that will work. As you start trying stuff you will realize that no matter how you set dominoes down, the way you fill up the first row is going to affect the second row. In the first row, 7 squares have to be filled up which means that when you fill them up, however you do it, you will end up with an odd number of spaces to fill up in the next row. You can continue this pattern until you get to the last row and that is where it is impossible. 
+
+In general that proof sucks, and the only way it works is if you try all possible configurations which is at most 31 factorial possibilities not considering symmetries.
+
+
+The book has a very elegant solution, in that that we observe that when the board is not mutilated it has 32 white and black spaces. If you take out the corners to make the mutilated board, lets say the white ones. You now have 30 white spaces and 32 black spaces. Each domino takes up a white and a black space. Hence it is impossible to fill the mutilated board with 31 dominoes.
