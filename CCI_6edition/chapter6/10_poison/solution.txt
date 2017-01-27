@@ -1,0 +1,29 @@
+I struggled a lot with this problem and discovered the answer where I struggled, but unfortunately I misunderstood the question. The wording: "you can only run tests once per day...", caused confusion and should clarify that you can use more than one test strip a day. I believe the confusion arises because the author uses the words test strips and tests synonymously. Either way here is the solution I found if one is only allowed to use one test strip a day.
+
+With one test strip a day the solution is pretty clear. Essentially you run a binary search. Here is how you do it:
+Day 1, divide the 1000 in to x[0] = 500 and x[1] = 500, and test one pile.
+Day 2, divide the 500 piles in to 250's: x[0][0] = x[0][1] = x[1][0] = x[1][1] = 250 and separate all in to two piles:
+    Pile 1:  x[0][0], x[1][0] and Pile 2:  x[0][1], x[1][1]. Test pile 1.
+
+Continue this pattern for 10 days and in 10 + 7 = 17 days you will find the poisoned bottle. 
+
+My 2 Cents on Riddles 
+There is something pretty important I want to point out here: even when you feel great about what you find, don't stop there. Expand your idea out and you might discover new perspective. Solving riddles is all about perspective or abstractions, just like any mathematical proof. Most riddles don't involve any additional knowledge and give you exactly what you need to get to the solution. First we look at what we have and we will find some relationship or property. We expand it out and find something new. We repeat the process until we reach the answer to the riddle. Also be patient, our minds are built in such a way that when we create new conceptualizations our thought processes will gravitate around those conceptualizations, so it is important to develop a process to solving these riddles.
+
+With that in mind, it is interesting to see that if I was a bit more patient I could have discovered the answer from the book. Observe the breakdown I have from above:
+
+Day 1: piles are setup like: x[_] where _ has either 0 or 1
+Day 2: piles are setup like: x[_][_]
+Day 3: piles are setup like: x[_][_][_]
+
+If continued this process, I would have discovered that on day 10 I would have had 2 piles of 500 but I would have each bottle's name as:
+     x[_][_][_][_][_][_][_][_][_][_]
+
+Now observe that, ceil(log2(1000)) = 10. This means that with 10 binary digits we can number the 1000 bottles. In fact, we can name 1024 bottles maximum with 10 binary digits, but if they used 1024 it would have been obvious on how to do it. This leads us to the answer from the book:
+
+Let number the test strip 0 to 9.
+x[0][1][2][3][4][5][6][7][8][9]
+Lets number the bottles 1 to 1000. Consider some bottle b, since 0 < b, then b must have at least one 1-bit. Find the positions p of these 1-bit's. Since ceil(log2(1000)) = 10, p can be in the range 0,1,2,...,9. For every p of every b, test strip p. Here we can assume multiple tests can be ran per day, so we run all 1000 bottles. After 7 days assuming we get the strips in the same configuration we delivered them as, the binary representation of the strips, 0 for negative poisoning and 1 for positive poisoning, leads us to the bottle that has the poison.
+
+
+
