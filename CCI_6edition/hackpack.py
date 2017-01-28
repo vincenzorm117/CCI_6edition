@@ -649,5 +649,32 @@ def hamming_distance(N):
 def power_of_2(N):
 	return (N & (N-1)) == 0
 
+def is_prime(N):
+	if not isinstance(N, int):
+		return None
+	if N <= 1:
+		return False
+	isPrime = [True] * (N+1)
+	for i in range(2,N):
+		if isPrime[i]:
+			for c in range(i*i,N+1,i):
+				isPrime[c] = False
+	return isPrime[N]
+
+def list_of_primes(N):
+	if not isinstance(N, int):
+		return None
+	if N < 0:
+		return []
+	isPrime = [True] * (N+1)
+	isPrime[0] = False
+	if 1 <= N:
+		isPrime[1] = False
+	for i in range(2,N):
+		if isPrime[i]:
+			for c in range(i*i,N+1,i):
+				isPrime[c] = False
+	return isPrime
+
 
 
