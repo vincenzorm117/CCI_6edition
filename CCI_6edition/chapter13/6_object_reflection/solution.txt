@@ -1,0 +1,13 @@
+Object reflection in Java is the programs ability to inspect it's self at runtime. This includes objects and what they hold.
+A great definition that I found goes as follows:
+Reflection is a language's ability to inspect and dynamically call classes, methods, attributes, etc at runtime.
+
+For instance, Java has a Method class and we can instantiate it with the method of some class. This is very similar to JavaScripts, call functionality in that you bind an object in the function and call it with the parameters that are set in the second argument.
+
+Reflection also supports inspecting for interfaces/protocols.
+
+Reflection is very useful for databases who don't know what type of data is going to be returned, and for big systems that need to run continously.
+
+In Java, Reflection enables the program to modify class or object variables regardless of the access modifier.
+
+Reflection is very useful when it comes to abstraction of data. Without it we would have to potentially code out a big complex set of if statements.

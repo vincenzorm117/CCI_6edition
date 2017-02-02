@@ -1,0 +1,7 @@
+
+
+
+List<Integer> getRandomSubset(List<Integer> list) {
+	Random rand = new Random();
+	return list.stream().filter( i -> return rand.nextBoolean()).collect(Collectors.toList());
+}

@@ -1,0 +1,20 @@
+
+
+All three classes implement, Serializable, Cloneable, and Map.
+
+HashMap:
+- Uses hash function for insertion time is based on the complexity of the hash function which is usually O(1). Keep in mind though that insertion time could take O(N), N being the size of the array at the moment. That is so because if the array is filled up it must be extended by creating an array of greater size and copying all of the keys to the new array.
+- Collisions are maintained by having the keys in a linked lists.
+- Retrieval is the same as insertion time
+- Iterating through the map will produce keys in unknown order.
+
+TreeMap:
+-  Insertion time is at most log(N) without concern of expansion as when a key is added, memory is allocated to hold it.
+Retrieval is the same as insertion time.
+- Iterating through the map produces the keys in order (implements Comparable).
+- Implemented with Red-Black tree.
+
+LinkedHashMap:
+- Everything is the same as a hashmap except with the additional need of memory for a doubly-linked buckets which maintains the order in which the keys were stored in.
+- Iterating through the map will produce the keys in the order in which they were inserted.
+- Very good for Least Recently Used (LRU) Caches

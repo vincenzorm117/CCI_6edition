@@ -1,0 +1,13 @@
+Templates in C++ and generics in Java, both work to make code more flexible. It allows programs to have abstract data structures. For example, a queue would be expected to work with any type of data as it doesn't normally depend on the type of data it holds, so generics/templates work pretty well to serve an abstract tytpe of object from the queue.
+
+The differences:
+
+- Java relies on type erasure, meaning that on compile time parameterized types are removed or erased. This means that generics are really just syntactic sugar. So something like: "ArrayList<Integer> a = new ArrayList<Integer>()" would be converted to "ArrayList a = new ArrayList()". And yes it does cast types when based on which type is used in the parameter.
+- On the other hand, on compile time C++ generates a specific version of the templated code for each type.
+	- This implies that classes that are templated will be duplicated so there is a unique class for each template type, and that means that each class has its own static variables.
+- In Java, there is only one set of static variables across the parameterized class types.
+- C++ can use primitive types like int, or bool whereas Java only supports classes.
+- In Java, the type parameter can't be used for static methods whereas C++ can.
+- In Java, parameterized classes all have a reference to the same class whereas in C++ you have a reference for each type that uses that parameterized class.
+
+NOTE: both C++ and Java let you impose restrictions such as a class implementing an interface/protocol or being a subclass of some class (don't forget C++ doesn't support interfaces/protocols).

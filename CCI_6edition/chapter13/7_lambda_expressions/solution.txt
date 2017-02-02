@@ -1,0 +1,26 @@
+
+
+// WITHOUT Lambda Expression
+int getPopulation(List<Country> countries, String continent) {
+	int pop = 0;
+	for(Country c : countries) {
+		if( continent.equals(c.getContinent()) ) {
+			pop += c.getPopulation();
+		}
+	}
+	return pop;
+}
+
+// WITH Lambda Expression
+int getPopulation(List<Country> countries, String continent) {
+	int pop = 0;
+	countries.forEach( c -> pop += continent.equals(c.getContinent()) ? c.getPopulation() : 0);
+	return pop;
+}
+
+
+// Book solution
+int getPopulation(List<Country> countries, String continent) {
+	Stream<Integer> populations = counties.stream().map(c -> c.getContinent().equals(continent) ? c.getPopulation() : 0)
+	return populations.reduce(0, (a,b) -> a + b);
+}
