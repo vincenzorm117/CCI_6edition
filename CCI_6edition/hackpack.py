@@ -245,8 +245,46 @@ class Stack:
 ####################################################################################
 ####################################################################################
 
-# class Queue:
-	# TODO
+class Queue:
+	class Node:
+		def __init__(self, data):
+			self.data = data
+			self.next = None
+			self.prev = None
+		def __str__(self):
+			return str(self.data)
+
+	def __init__(self):
+		self.head = self.tail = None
+		self.count = 0
+
+	def isEmpty(self):
+		return self.count == 0
+	
+	def add(self, item):
+		self.count += 1
+		if self.head is None:
+			self.head = self.tail = self.Node(item)
+			return
+		self.tail.next = self.Node(item)
+		self.tail.next.prev = self.tail
+		self.tail = self.tail.next
+
+
+	def remove(self):
+		if self.head is None:
+			return None
+		self.count -= 1
+		d = self.head
+		self.head = self.head.next
+		item = d.data
+		del d
+		if self.head is None:
+			self.tail = None
+		return item
+
+	def peek(self):
+		return self.head.data if self.count == 0 else None
 
 
 ####################################################################################
@@ -677,4 +715,10 @@ def list_of_primes(N):
 	return isPrime
 
 
+def log(b,x):
+	c = 0
+	while b <= x:
+		x /= b
+		c += 1
+	return c
 
