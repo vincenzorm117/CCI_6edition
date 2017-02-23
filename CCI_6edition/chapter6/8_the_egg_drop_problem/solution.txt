@@ -1,0 +1,32 @@
+Anyone approaching this problem could first feel hopelessness of having only two eggs to drop with 100 possible floors where only one of them is the Nth floor the last floor where the egg won't break if dropped. It is important to remember that with any riddle you always start with the information they give you and BUILD UP.
+
+So we have two eggs and if I drop it from any floor their is a good chance it will break. Is there a floor I can drop it from where I am guaranteed the egg not to break, and why two eggs? It is clear that the first floor is always going to be a good floor meaning the egg won't break there. The problem here is that we don't know wether the second floor is a good floor either, so we try the next floor and continue until we find the Nth floor. With this solution, the worse case number of drops is 100, that is if the N = 100.
+
+Lets consider every other floor. Worse case here is 51, that is if N = 99.
+
+Lets consider every third floor. Worse case here is 35, that is if N = 98 because we would try all the 3rd floors until 99 (33 floors traversed) and then have to try 97, then 98.
+
+At this point, I tried something totally different and concluded doing something similar to every 2nd or 3rd would be closer to the answer. I tried doing a binary search. Lets try floor 50 and then try the other halves after. The problem with this is that if N < 50 then we have to check 51 floors which is no better than every 3rd floor. I got stuck thinking about this since if the 50th floor worked then after that the worst case was 26.
+
+I left my final answer with every 10th: lets consider every 10th floor, then the worst case is 19 if N = 99.
+
+
+So here is the brilliance of the book solution which I explored before accepting and I try my best to explain here.
+
+Lets observe every kth floor. What is wrong with it? Consider N = 39, we would have to check a total of T = ceil(39 / k) + (39 % k) floors where ceil is the ceiling function. Observe that if k < N then k < T. Can we devise a method in which after we check ceil(N / k) floors we have T < k floors to check?
+
+Lets consider decreasing the amount of floors we jump every time we try a floor. So we try floor k then (k - 1), (k - 2), and so forth. So we have:
+
+sum_k=1^M (k) = 100       (Eq. 1)
+
+I picked 100 on the RHS (Right Hand Side) because it would be ideal to follow this strategy until we got as close to 100 as possible.
+
+
+Eq. 1 leads to
+
+M(M+1)/2 = 100  =>  M^2 + M - 200 = 0.    (Eq. 3)
+
+If we solve for M we have a number between 13 and 14. If you try both you will discover that 14 is the better answer of the 2 as with 13 the worst case is 19 and for 14 the worst case 14.
+
+
+* NOTE: It is important to keep in mind that we didn't go searching for the Nth floor, instead we devised the proper methodology to find the Nth floor. This is the essence of mathematics and algorithms, that is, assumptions. Make assumptions, explore the information you have, and repeat this process.
