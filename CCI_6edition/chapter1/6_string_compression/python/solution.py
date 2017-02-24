@@ -27,18 +27,19 @@ def string_compression_with_look_ahead(s):
 
 	count = 0
 	curr = s[0]
-	buff = ''
+	buff = []
 
 	for c in s:
 		if curr != c:
-			buff += str(curr) + str(count)
+			buff.append(curr)
+			buff.append(str(count))
 			curr = c
 			count = 0
 		count += 1
 	buff += str(curr) + str(count)
 
 	if len(buff) < L:
-		return buff
+		return ''.join(buff)
 	return s
 
 
@@ -46,7 +47,7 @@ def string_compression_with_look_ahead(s):
 def string_compression(s):
 	L = len(s)
 	if L <= 0:
-		return L
+		return s
 
 	count = 0
 	curr = s[0]
@@ -63,6 +64,8 @@ def string_compression(s):
 	if len(buff) < L:
 		return buff
 	return s
+
+
 
 while True:
 	print(string_compression_with_look_ahead(input()))
