@@ -722,3 +722,14 @@ def log(b,x):
 		c += 1
 	return c
 
+
+def fib(n):
+	if not isinstance(n, int) or n < 0:
+		return None
+	if n == 0 or n == 1:
+		return n
+	f = [0,1]
+	for i in range(n-1):
+		f[i%2] = f[0] + f[1]
+	return f[n%2]
+
