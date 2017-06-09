@@ -733,3 +733,11 @@ def fib(n):
 		f[i%2] = f[0] + f[1]
 	return f[n%2]
 
+
+def print_grid(g):
+	n,m = len(g), len(g[0])
+	for y in range(n):
+		for x in range(m):
+			print(g[y][x], end=" ")
+		print()
+
