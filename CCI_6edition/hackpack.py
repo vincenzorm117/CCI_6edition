@@ -618,6 +618,41 @@ def top_sort(G):
 ####################################################################################
 # Nice Functions
 
+def nCk(bag, k):
+	L = len(bag)
+	if k < 0 or L < k:
+		return None
+	chosen = []
+	q = [([], k, 0)]
+	while 0 < len(q):
+		c = q.pop()
+		if c[1] == 0:
+			chosen.append(c[0])
+			continue
+		for i in range(c[2], L):
+			N = c[0][:]
+			N.append(bag[i])
+			q.append((N, c[1]-1, i+1))
+	return chosen
+
+	
+def powerset(bag):
+	L = len(bag)
+	chosen = []
+	for k in range(L+1):
+		q = [([], k, 0)]
+		while 0 < len(q):
+			c = q.pop()
+			if c[1] == 0:
+				chosen.append(c[0])
+				continue
+			for i in range(c[2], L):
+				N = c[0][:]
+				N.append(bag[i])
+				q.append((N, c[1]-1, i+1))
+	return chosen
+
+
 def possibilities(bags):
 		if not isinstance(bags, list) or len(bags) <= 0:
 			return None
