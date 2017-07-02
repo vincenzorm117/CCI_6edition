@@ -671,7 +671,7 @@ def possibilities(bags):
 					stack.append((c,nxt))
 
 
-def permute(l):
+def permute_dups(l):
 	if not isinstance(l, (list)):
 		return None
 	if len(l) <= 0:
@@ -693,6 +693,29 @@ def permute(l):
 				c[0][c[1]], c[0][i] = c[0][i], c[0][c[1]]
 	return sols
 
+
+def permute(l):
+	if not isinstance(l, (list)):
+		return None
+	if len(l) <= 0:
+		return []
+	L = len(l)
+	stack = [(l,0)]
+	sols = set()
+	while 0 < len(stack):
+		c = stack.pop()
+		if c[1] == L:
+			sol = []
+			for i in c[0]:
+				sol.append(i)
+			print(sol,tuple(sol))
+			sols.add(tuple(sol))
+		else:
+			for i in range(c[1],L):
+				c[0][c[1]], c[0][i] = c[0][i], c[0][c[1]]
+				stack.append((c[0][:], c[1]+1))
+				c[0][c[1]], c[0][i] = c[0][i], c[0][c[1]]
+	return sols
 
 
 def genvals(N, alpha):
