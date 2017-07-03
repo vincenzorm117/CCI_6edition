@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 
 
-
+# Moves letters around (space efficient)
 def permute(l):
 	if not isinstance(l, (list)):
 		return None
@@ -24,6 +24,23 @@ def permute(l):
 				c[0][c[1]], c[0][i] = c[0][i], c[0][c[1]]
 	return sols
 
+# Uses DP
+def permute2(l):
+	if not isinstance(l, (list)):
+		return None
+	L = len(l)
+	if L <= 0:
+		return []
+	curr = [[]]
+	for k in range(L):
+		print(curr)
+		nxt, K = [], k+1
+		for p in range(K):
+			for c in curr:
+				nxt.append(c[0:p] + [l[k]] + c[p:K])
+		curr = nxt
+	return curr
+
 
 ts = [
 	([], []),
@@ -32,9 +49,10 @@ ts = [
 	([1,2,3], [[1,2,3],[2,1,3],[1,3,2],[2,3,1],[3,1,2],[3,2,1]])
 ]
 
+
 for t in ts:
 	q, a = t
-	sol = permute(q)
+	sol = permute2(q)
 	print(q)
 	print(sol)
 	correct = True
