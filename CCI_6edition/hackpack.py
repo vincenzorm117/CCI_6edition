@@ -618,6 +618,9 @@ def top_sort(G):
 ####################################################################################
 # Nice Functions
 
+####################################################################################
+# Combinatorics Functions
+
 def nCk(bag, k):
 	L = len(bag)
 	if k < 0 or L < k:
@@ -671,7 +674,7 @@ def possibilities(bags):
 					stack.append((c,nxt))
 
 
-def permute_dups(l):
+def permute(l):
 	if not isinstance(l, (list)):
 		return None
 	if len(l) <= 0:
@@ -694,7 +697,7 @@ def permute_dups(l):
 	return sols
 
 
-def permute(l):
+def permute_no_dups(l):
 	if not isinstance(l, (list)):
 		return None
 	if len(l) <= 0:
@@ -717,6 +720,34 @@ def permute(l):
 				c[0][c[1]], c[0][i] = c[0][i], c[0][c[1]]
 	return sols
 
+# Assymptotically faster than permute_no_dups
+def permute_no_dups2(l):
+	if not isinstance(l, (list)):
+		return None
+	if len(l) <= 0:
+		return []
+	L = len(l)
+	mp = {}
+	for c in l:
+		if c not in mp:
+			mp[c] = 0
+		mp[c] += 1
+	res = []
+	keys = mp.keys()
+	q = [([], L, mp)]
+	while 0 < len(q):
+		pre, k, mp = q.pop()
+		if k == 0:
+			res.append(pre)
+			continue
+		for c in keys:
+			count = mp[c]
+			if 0 < count:
+				mp[c] = count - 1
+				q.append((pre + [c], k - 1, mp.copy()))
+				mp[c] = count
+	return res
+
 
 def genvals(N, alpha):
 	if N <= 0:
@@ -734,21 +765,7 @@ def genvals(N, alpha):
 
 
 ####################################################################################
-# Bitwise functions
-
-
-def hamming_distance(N):
-	if not isinstance(N, int):
-		return 0
-	count = 0
-	while 0 < N:
-		count += 1
-		N = N & (N - 1)
-	return count
-
-
-def power_of_2(N):
-	return (N & (N-1)) == 0
+# Math functions
 
 def is_prime(N):
 	if not isinstance(N, int):
@@ -804,3 +821,18 @@ def print_grid(g):
 			print(g[y][x], end=" ")
 		print()
 
+####################################################################################
+# Bitwise functions
+
+def hamming_distance(N):
+	if not isinstance(N, int):
+		return 0
+	count = 0
+	while 0 < N:
+		count += 1
+		N = N & (N - 1)
+	return count
+
+
+def power_of_2(N):
+	return (N & (N-1)) == 0
