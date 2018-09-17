@@ -1,0 +1,18 @@
+
+Deep and shallow copy cannot be discussed without mentioning pointers. When a shallow copy is done a pointers address is assigned to another poitner; notice the data is not copied, only its memory address. With a deep copy all of the data associated with the pointer is copied.
+
+EXAMPLE:
+int a = 5;
+int b = 9;
+int c = 23;
+int *d = a;
+
+Shallow copy:
+d = b;
+
+Deep copy:
+*d = c;
+
+
+BOOK ANSWER:
+This is actually for objects. Shallow copy copies all the member values from one object to another. A deep copy does all this and also deep copies any pointer objects.
