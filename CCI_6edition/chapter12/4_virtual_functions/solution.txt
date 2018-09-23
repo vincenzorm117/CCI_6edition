@@ -1,0 +1,42 @@
+
+
+In C++, virtual functions enable polymorphisms such that to allow class methods involved in inheritance to be handled appropriately. If we consider the program below, what would it print to cout? Because print is a virtual function of Animal, it will run the Dog class's version of print. show is not a virtual function of Animal so it will call Animal's version of it. Keep in mind this all depends on the class pointer that invokes the function. In this case, this happens as such because the pointer in the run function is of type Animal. If the pointer were of type Dog in the run function, then the call to show would be "show Dog class", but the call to print would still be "print Dog class". Also when a function is virtual, which function is ran, either from the base or derived class, is resolved at runtime instead of compile time.
+
+
+#include<iostream>
+
+using namespace std;
+  
+class Animal {
+public: 
+    virtual void print () { 
+        cout<< "print Animal class" <<endl; 
+    } 
+    void show () { 
+        cout<< "show Animal class" <<endl; 
+    } 
+}; 
+  
+class Dog:public Animal {
+public: 
+    void print () {
+        cout<< "print Dog class" <<endl;
+    }
+  
+    void show () {
+        cout<< "show Dog class" <<endl;
+    }
+}; 
+
+void run(Animal *creature) {    
+    //virtual function, binded at runtime 
+    creature->print();  
+      
+    // Non-virtual function, binded at compile time 
+    creature->show();  
+}
+  
+int main() {
+    Dog dog;
+    run(&dog);
+} 
