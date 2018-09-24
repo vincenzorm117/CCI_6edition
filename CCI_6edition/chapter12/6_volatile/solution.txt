@@ -1,0 +1,2 @@
+
+The volatile keyword is a C variable qualifier used to prevent the compiler on making optimizations to the that variable. The keyword volatile is usually used when the variable is global to the scope and may change for unknown reasons. Two cases are when that variable is reading from IO or when a variable is changed by another thread. 
