@@ -1,0 +1,1 @@
+The destructor in a base class needs to be declared virtual because all of the derived classes need to run their destructor as well as the base class. The virtual destructor enables the derived classes' destructors to be called. With this, the derived classes can do any cleaning up followed by the base class's destructor.
