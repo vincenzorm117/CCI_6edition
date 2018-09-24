@@ -15,4 +15,4 @@ Deep copy:
 
 
 BOOK ANSWER:
-This is actually for objects. Shallow copy copies all the member values from one object to another. A deep copy does all this and also deep copies any pointer objects.
+This is actually for structs and objects. Shallow copy copies all the member values from one struct/object to another. A deep copy copies the values as oppose to the pointers.
