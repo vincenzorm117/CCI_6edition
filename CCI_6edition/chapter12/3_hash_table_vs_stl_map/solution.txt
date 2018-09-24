@@ -1,0 +1,8 @@
+Q: Compare and contrast a hash table and an STL map. How is a hash table implemented? 
+
+A regular hash table is a mapping between a key and a value that perfoms retrievables in O(1) time. This is traditionally done with an array of linked lists. An STL map works like a hash table, but it uses a binary tree to store values in order. Its retrievable time is O(log(n)).
+
+
+Q: If the number of inputs is small, which data structure options can be used instead of a hash table?
+
+If the number of inputs is small the STL map should work fine, as O(log(n)) should be fairly fast.
