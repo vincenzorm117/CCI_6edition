@@ -1,0 +1,5 @@
+
+
+People <many-to-many> Companies
+People <one-to-one> Professionals
+Professionals <many-to-many> Companies
