@@ -2,105 +2,39 @@
 
 
 
-def permute_long(l):
-	if not isinstance(l, (list)):
-		return None
-	if len(l) <= 0:
-		return []
-	L = len(l)
-	stack = [(l,0)]
-	sols = set()
-	while 0 < len(stack):
-		c = stack.pop()
-		if c[1] == L:
-			sol = []
-			for i in c[0]:
-				sol.append(i)
-			sols.add(tuple(sol))
-		else:
-			for i in range(c[1],L):
-				c[0][c[1]], c[0][i] = c[0][i], c[0][c[1]]
-				stack.append((c[0][:], c[1]+1))
-				c[0][c[1]], c[0][i] = c[0][i], c[0][c[1]]
-	return sols
-
-
-def permute_recursive(l):
-	if not isinstance(l, (list)):
-		return None
-	if len(l) <= 0:
-		return []
-	L = len(l)
-	mp = {}
-	for c in l:
-		if c not in mp:
-			mp[c] = 0
-		mp[c] += 1
-	res = []
-	keys = mp.keys()
-	def foo(prefix, remaining):
-		if( remaining == 0 ):
-			res.append(prefix[:])
-			return
-		for c in keys:
-			count = mp[c]
-			if 0 < count:
-				mp[c] = count - 1
-				foo(prefix + [c], remaining - 1)
-				mp[c] = count
-	foo([], L)
-	return res
-
-def permute(l):
-	if not isinstance(l, (list)):
-		return None
-	if len(l) <= 0:
-		return []
-	L = len(l)
-	mp = {}
-	for c in l:
-		if c not in mp:
-			mp[c] = 0
-		mp[c] += 1
-	res = []
-	keys = mp.keys()
-	q = [([], L, mp)]
-	while 0 < len(q):
-		pre, k, mp = q.pop()
-		if k == 0:
-			res.append(pre)
-			continue
-		for c in keys:
-			count = mp[c]
-			if 0 < count:
-				mp[c] = count - 1
-				q.append((pre + [c], k - 1, mp.copy()))
-				mp[c] = count
-	return res
+def permuteNoDups(alphabet):
+    if alphabet == '':
+        print('')
+        return
+    freq = {}
+    for letter in alphabet:
+        if letter not in freq:
+            freq[letter] = 0
+        freq[letter] += 1
+    def recurse(word, k, freq, size):
+        if k == size:
+            print(''.join(word))
+            return
+        for letter in freq:
+            if freq[letter] <= 0:
+                continue
+            freq[letter] -= 1
+            word.append(letter)
+            recurse(word, k+1, freq, size)
+            word.pop()
+            freq[letter] += 1
+    return recurse([], 0, freq, len(alphabet))
 
 
 
-ts = [
-	([], []),
-	([1,2], [[1,2],[2,1]]),
-	([1,2,3], [[1,2,3],[2,1,3],[1,3,2],[2,3,1],[3,1,2],[3,2,1]]),
-	([1,1], [[1,1]]),
-	([1,1,2], [[1,1,2],[1,2,1],[2,1,1]]),
-	([1], [[1]])
+testcases = [
+    'a',
+    'ab',
+    'abc',
+    'aab',
+    'aabc'
 ]
 
-for t in ts:
-	q, a = t
-	sol = permute(q)
-	print(q)
-	print(sol)
-	correct = True
-	if len(sol) == len(a):
-		for x in a:
-			if x not in sol:
-				correct = False
-				break
-	else:
-		correct = False
-	assert(correct)
-
+for i in range(len(testcases)):
+    print('Test (%s): %s' % (i+1, testcases[i]))
+    permuteNoDups(testcases[i])
