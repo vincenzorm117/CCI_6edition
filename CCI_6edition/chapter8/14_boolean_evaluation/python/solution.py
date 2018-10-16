@@ -29,6 +29,7 @@ def num_boolean_evaluations(expression, answer):
         for i in range(start, end):
             leftZeros, leftOnes = recurse(start, i, values, operators)
             rightZeros, rightOnes = recurse(i+1, end, values, operators)
+
             if operators[i] == 0: # & AND
                 zeros += leftOnes * rightZeros + leftZeros * rightZeros + leftZeros * rightOnes
                 ones += leftOnes * rightOnes
@@ -40,6 +41,7 @@ def num_boolean_evaluations(expression, answer):
                 ones += leftZeros * rightOnes + leftOnes * rightZeros
             else:
                 raise ValueError('Invalid operator')
+
         return (zeros, ones)
             
     zeros, ones = recurse(0, len(values)-1, values, operators)
