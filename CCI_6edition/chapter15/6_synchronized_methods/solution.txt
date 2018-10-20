@@ -1,0 +1,2 @@
+
+The synchronized keyword makes multiple threads unable to execute it on the same class instance. This does not affect other methods that are not synchronized, so A and B can be executed at the same time.
