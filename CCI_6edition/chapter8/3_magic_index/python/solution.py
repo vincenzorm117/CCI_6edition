@@ -41,16 +41,16 @@ def find_magic_index_with_dups(A):
 	L = len(A)
 	q = [(0, L-1)]
 	while 0 < len(q):
-		c = q.pop()
-		curr = int((c[0]+c[1])/2)
+		low, high = q.pop()
+		curr = int( (low+high)/2 )
 		if A[curr] == curr:
 			return curr
 		left = min(curr - 1, A[curr])
 		right = max(curr + 1, A[curr])
-		if 0 <= left and c[0] <= left:
-			q.append( (c[0], left) )
-		if right < L and right <= c[1]:
-			q.append( (right, c[1]) )
+		if 0 <= left and low <= left:
+			q.append( (low, left) )
+		if right < L and right <= high:
+			q.append( (right, high) )
 	return None
 
 
@@ -91,6 +91,7 @@ def gen_array():
 testcases = [
 	([1,3,3,4,5,5], 5),
 	([0], 0),
+    ([-40,-20,-1,1,2,3,5,7,9,12,13], 7),
 	([1], None),
 	([], None),
 	([1,2,3,4,5], None)
@@ -98,8 +99,8 @@ testcases = [
 
 for t in testcases:
 	A = t[0]
-	print(A)
 	sol = find_magic_index_with_dups(A)
+	print(A, sol)
 	assert(sol == t[1])
 
 
