@@ -8,9 +8,13 @@ class Chopstick {
         lock = new ReentrantLock();
     }
 
-    public void pickUp() {
-        lock.lock();
+    public boolean pickUp() {
+        return lock.tryLock();
     }
+
+    // public void pickUp() {
+    //     lock.lock();
+    // }
 
     public void putDown() {
         lock.unlock();

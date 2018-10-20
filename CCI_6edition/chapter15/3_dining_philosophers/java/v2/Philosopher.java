@@ -13,14 +13,20 @@ class Philosopher extends Thread {
     }
 
     public void eat() {
-        pickUp();
-        chew();
-        putDown();
+        if( pickUp() ) {
+            chew();
+            putDown();
+        }
     }
 
     public void pickUp() {
-        left.pickUp();
-        right.pickUp();
+        if( !left.pickUp() ) {
+            return false;
+        }
+        if( !right.pickUp() ) {
+            return false;
+        }
+        return true;
     }
 
     public void chew() {
