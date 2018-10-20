@@ -1,0 +1,2 @@
+
+I would track the date and time of when a thread starts and when it ends. This information can be logged to a file. The data would be the thread id, if it is a start or end of a thread, and the datetime.
