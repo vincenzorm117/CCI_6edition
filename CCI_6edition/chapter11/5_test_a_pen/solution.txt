@@ -1,0 +1,35 @@
+There are several factors that come in mind when testing a pen. We must think about who, what, when, where, how and which in a very general fashion. We take the answer to each of these and build dimensions to build more specific questions.
+
+So who is using the pen? I think gender for the most part brings up questions regarding the visual aesthetics of the pen. Testing that, would require categorical data which would require a random sample of a population to test their opinions on how the pen looks. The other factor is age, and that brings up the safety aspect of the pen. Profession, I think is a big one which highlights the what and where, maybe the pen is used for professionals in hazardous conditions.
+
+What is the pen used for? Most pens are made to be used as writing utensils, but maybe someone is using them as a weapon or maybe even to juggle.
+
+For when, I would test how long the pen lasts and how usaged different times of the day affect the pen.
+
+For where, I would test the pen in different environments, an office, a humid place, a dry place, etc. I would also test the pen on different surfaces.
+
+For how, I would test the pen in different ways. If its writing I would test the pen's writing ability at different angles and directions. 
+
+For which, I would just test the different kinds of pens. This is subject to the person interested in the test or the purpose of the test. For instance, the POI might just want to test cap pens, twist pens, click pens or just fountain pens.
+
+
+================================================
+All being said I would test the pen as such:
+================================================
+Can it write? If it does how does it perform on different surfaces.
+How much can the pen write?
+How sharp is the pen?
+Is the pen aero-dynamic?
+Is the pen easy to juggle?
+How durable is the clip on the pen if it has one?
+What happens when I throw the pen and it falls on the ground? If it doesn't break, how many throws does it take until the pen breaks?
+Does the pen leak?
+How much force can the pen sustain?
+How does the pen perform under varying temperatures: cold, hot, room-temperature?
+If the pen is a click, twist or cap pen, I would open it, close it, use it and try different permutations. I would try and see if the pen stops working after a certain amount of use.
+I would test safetiness of the pen: 
+-- how harmful is the ink to humans and animals. 
+-- Is the pen sharp?
+If I take apart the pen, can I put it back together?
+Can I replace the pen's ink container if it has one?
+I would take a random sample of human beings or animals and determine how likable the pen or how categorically visually pleasing the pen is.

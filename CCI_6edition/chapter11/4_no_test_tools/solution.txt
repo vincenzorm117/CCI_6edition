@@ -1,0 +1,23 @@
+
+
+To load test a webpage, I would do a few things:
+
+Before starting, I would test my internet connection by making sure I am able to access either an intranet with the page or the internet. The case for the intranet is very specific so I will assume we have access to the internet. I would proceed to test a few web pages and make sure I am able to access the web. Once I have access, I would run 10 speed tests (probably on 1-3 different speed test pages) and record the average. This is important as it affects the page load time.
+
+After the preliminary tests, I would want to test is if the page loads at all. I would then record the number of bytes of the page to see how big it is. In the terminal, I would run host with the page URL and see what how many IP's are serving the page, this will be more useful when I attempt loading the page from a different IP.
+
+Now I would these tests:
+
+1. First I would check the page on almost no load. I would do this by running a simple curl maybe 10 times and saving the average load time. This will give me a baseline.
+
+2. I would then repeat (1) but on different browsers and devices:
+Browsers: Google Chrome, FireFox, Safari, IE Edge, iOS Safari, Android Chrome
+Devices: Macbook, PC, iPhone, Android Phone (Pixel 2), iPad
+** The purposes of the browsers is to get a sense for how each browser performs because maybe the page is small but the page has some code that makes the browser crash, and the page never loads. The devices are to see how the page loads with different computer setups (Processors, and memory differences).
+
+3. I would then write a shell script to loop thousands to millions of times with the body running a curl on the page and recording load times of the page to a file with the time command.
+
+4. I would repeat (3) but with multiple computers. While the curls are running I would load the page on the browsers I tested (2) and record an average from 10 loads.
+
+5. I would run (1) from different locations using a VPN or proxy. TunnelBear can help with this, but I might have to pay a little bit for these tests.
+

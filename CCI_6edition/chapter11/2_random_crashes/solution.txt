@@ -1,0 +1,11 @@
+
+
+The variability of where the program crashes can be due to a few things:
+
+1. The program is controlling flow with the date and time, thus it crashing at different places when run at different times. To test this, I would run the program with a specific system time, and retry with the same time to see if the issue occurs. If there are variables with dates I would hard code the dates to see if they produce the same result. A particular case of this might be the month in which the program is run with since there are 12 > 10 months.
+
+2. The program is reading and writing to a file, socket, pipe, or stream, so that when it is ran it has different values for its variables. (NOTE: this is most often the case.). If there is an input file, I would copy the input files, run the program, note the output, and then repeat with the contents of the copied input files to see if I get the same result. If the program is reading input from a file where each input is a month it would make sense why its crashing assuming the months in each field were consecutive.
+
+3. Other programs might be filling up RAM memory causing our program to run out of memory to use, so I would just kill those programs if necessary and see how our program behaves.
+
+4. More than one instance of the program might be running, so I would kill past versions and run the program clean.

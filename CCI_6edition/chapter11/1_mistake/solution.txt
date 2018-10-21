@@ -1,0 +1,9 @@
+CODE:
+
+unsigned int i;
+for (i = 100; i >= 0; --i)
+    printf("%d\n", i);
+
+
+1. This code would run forever because i of "i >= 0" causing i to reset to the maximum integer size and keep looping from there.
+2. printf("%d\n", i); should probably be printf("%u\n", i); as i is unsigned.

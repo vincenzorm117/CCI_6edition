@@ -1,0 +1,41 @@
+We have the following method used in a chess game; boolean canMoveTo(int x, int y). This method is part of the Piece class and returns whether or not the piece can move to position (x, y). Explain how you would test this method.
+
+
+class Piece {
+    boolean canMoveTo(int x, int y)
+}
+
+In these cases, I am assuming:
+1. (x,y) is in (n,m) where 0 <= n,m <= 7. 
+2. There are pieces on the board for some game where each player has at least one king.
+
+
+I would test all possibilities in these cases since there are 64 possibilities valid and invalid for each piece and with 16 pieces that makes 1024 possible calls to canMoveTo in that move. I'll explain these here:
+
+In these cases, Im assuming Im the black chess pieces.
+
+1. I would test all valid moves for each piece to see if they are valid.
+
+2. I would also test all invalid moves for each piece to see if they are invalid.
+
+3. I would then try weird values outside the range: x < 0 and 7 < x and y < 0 and 7 < y and see if any product true.
+
+4. For a non-crowned/non-queened pawn, I would try one or two moves up if they are valid and check if the pawn can move. I would also try one diagonal to jump a piece and see if the pawn can move. I would then try all the invalid moves and see if the pawn shows up as invalid. Once the pawn reaches the other side of the board, I would check it like a queen.
+
+5. For a bishop I would try the diagonals including where they end if at a white piece or before a black piece and see if they show up as true and then check all the other ones for false. These false moves include specially the ones where the bishop can't move diagonally past one of its own black pieces, those spaces the bishop should not be able to reach so I would check those.
+
+6. The rook I would check like I checked the bishop but up, down, left, and right instead of the diagonals. I would also check for castling with the king. 
+
+7. The knight I would check with its L pattern. If the knight was in the center of the board without any other pieces the knight would have 8 possible moves so I would try these moves where ever possible and see if they would product true. All other moves I would check for false.
+
+8. The Queen I would check like the bishop and rook combined.
+
+9. For the King, I would just check wether it can move one space in any direction that doesn't go out of the board and doesn't fall in a space where a white piece can jump my King. All other moves I would check to see if they produce false.
+
+10. I would test all the valid move sets: all values of x s.t. 0 <= x <= 7 and for each value go with each value of y s.t. 0 <= y <= 7 so to test.
+
+11. I would test for moves where one of my pieces can land on one of my other pieces and make sure its false.
+
+12. I would test this method with multiple threads and see how it handles a case where Thread A tried to move to coordinates (x1,y1) while Thread B tried to move to the same coordinates.
+
+13. I would run multiple instances of the program, try to get to similar states and test the condition in (12) where in one program a black piece is checking to move to coordinates (x1,y1) while in the other process a white piece is trying to move to the same coordinates of (x1,y1) and see if, assuming its valid in each game process, that it produces true.

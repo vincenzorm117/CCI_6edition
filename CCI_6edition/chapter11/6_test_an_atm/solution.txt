@@ -1,0 +1,30 @@
+Im assuming distributed banking system means that there is a cloud composed of computers/servers that manage all user accounts communicating with multiple ATM's (Automated Teller Machines). So that a two people may make transactions for the same account in different places in the world, and different or almost same times.
+
+For simplicity, I am also assuming deposits and withdrawals are free. Also in theses tests, unless mentioned, Im assuming my balance is $0.
+
+
+1. I would try to deposit $20 and then withdraw $20 to see if I can get $20 back.
+
+2. I would repeat (1) but withdraw from a different ATM.
+
+3. I would deposit $30 and withdraw $20. I would repeat this from a different ATM.
+
+4. I would deposit $20 and withdraw $30. I would repeat this from a different ATM. Here I would see if I am able to get $30 withdrawn, meaning I can get more than I put in initially.
+
+5. If I have an infinite amount of money, I would want to see if there is a limit to how much I can store in the bank. Here I am testing for integer overflow. The way I would do this is start with the dollar amounts of 2^1, 2^2, 2^3, 2^4, 2^5, ... , 2^70. I picked 2^70 = 1,180,591,620,717,411,303,424 as a stopping point as anything greater than 2^64 is checking for the overflow condition, but it is worth noting that you can test up to higher numbers but at some point you are looking at bandwith issues which are very unlikely also the amount you'd see would be probably at most in the trillions ever in a transaction. So testing for really larger numbers is just checking for that overflow case. I would then try to withdraw the same amounts I deposited in reverse order or in the same order.
+
+6. I would test the ATM for security. I want to see how easy it is for me to steal the money. This in real life is not very easy to do, so in a practical situation I would try to fiddle with a few things on the ATM.
+
+7. I would also test for accessability and control reliability, are the ATM controls easy to read and operate? Is the screen bright enough? If the machine is sound/voice operated can I hear it and can it hear my instructions? Are the buttons hard to push or are they broken? Is the machine at eye level or do you have to reach up or down to use?
+
+8. I would test for customers who don't understand how to use it. How easy would it be for them to reach customer support from the machine?
+
+9. I would test the machine for physical transaction privacy. Most ATMs come with a small oval mirror so you can see the people behind you. Also some have a cover over the keypad to hide pin entering.
+
+10. I would test how reliable the machine is at returning your card and how it handles things that are not a card. Also I would test how reliable the machine is at reading my card; does it take multiple tries to read it or does it get it at the first time. Some machines still require to swipe, so I would try swiping different ways.
+
+11. All ATM's require a pin, so I would try my pin to see if it works. I would try the wrong pin, no pin, or a really long pin. I would figure out what the maximum sized pin is and try that.
+
+12. In this case, assume I have an infinite amount of money in the bank. Most ATM's ask if I want to withdraw $20, $40, $60, etc, and a custom amount. I would test each of these to see if it withdraws the right amount. For the custom amount, I would try a negative value if possible, I would try $0, $20, $40, $60, and then some really big numbers.
+
+13. I mentioned a case similar to this, but I wanted to point out the specificity of the case. I would take all the money out of my account. I don't think most banks let you do that today, but I would try. I would also try this with multiple people at other ATM's or the same ATM.
