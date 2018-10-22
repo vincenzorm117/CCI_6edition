@@ -1,0 +1,23 @@
+These are general notes regarding testing.
+
+From my responses and the answers I've read, these are my suggestions on how to approach testing.
+
+First start out with the W's: Who is using it; What are they using of it; When or how frequent are they using it; Where are they using it; Why are they using it; How are they using it; and Which are they using.
+
+Some of these seem very simple but each one has a few things that I think should be kept in mind. Before I jump into these things about the W's, first I want to also mention what you as a tester have. Are you black box or white box testing this thing and do you have tools at your disposal?
+
+Now for the W's:
+
+Who: Who is using the thing is very important as it could narrow down the use cases. The thing to be tested could be aimed to be used by children, blind people, individuals with ADD, animals, the list goes on. You can see already that in a case where somebody is blind could change usage dramatically.
+
+What: In the case of the pen, it is easy to think that is being tested for writing, but maybe the pen is not meant to be tested for that. What if the pen is meant to be used as weapon, then you would ask about its sharpeness, durability or aero dynamics. What if the pen is meant to be usaged as a visually aesthetic piece, the list goes on.
+
+When: This one is simple, is there a particular date, time the thing is used? Is it used more than once? Is it used under specific conditions, if so what are they?
+
+Where: This ons is simple too, is there a particular place this thing is used? Is it used anywhere, everywhere or are there conditions to where it is used? Consider the cell phone, it can be used anywhere except where there is no signal. Those are key points to test a cell phone on. 
+
+How: I go back to the pen here to make a distinction between How and What. Lets establish that the pen is used to write, that's the what, now how is it intended to be used. Do you hold the pen conventionally or do you hold it with your mouth? The how I think is more of a specification to the what, but it adds a little more information.
+
+Why: This is usually answered by the things function, but I think it should be asked regardless. In the case of a cell phone, what if the why is to make a one time emergency phone call to warn the local government of an impending danger? That's very specific right? That phone call is very important and gives direction on what to test specifically that is the phone call must go through and it must not have any disruptions because it is important.
+
+Which: This one is specific to the thing. I go back to the pen: you have ball point pens, fountain pens, markers, etc. You might argue that a marker is not a pen, but that is something that you should ask because you want to make the least amount of assumptions so you can test more efficiently.
