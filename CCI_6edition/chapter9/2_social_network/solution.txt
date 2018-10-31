@@ -1,0 +1,43 @@
+First I want to clairy that this has to be done electronically and it has to cater to a wide audience assuming it is to be like Facebook or LinkedIn.  So now what do these data structures look like?
+
+For simplicity, I am going to make these assumptions. If there were an interviewer I would verify wether the assumptions are valid or not. 
+I am assuming that the distance between two people is just based on how many friend connections or relationships it takes to get from one person to another. I am assuming that a person just has a name and a list of friends. The data associated with a relationship is just that. You could argue that relationships have a date created like a date when the relationship was formed, but for simplicity I am going to ignore to focus on what I think is the issue which is how to make this scale for hundreds of millions of people.
+
+
+===============
+Case 1:
+===============
+
+class Person {
+    string name;
+    List<Person> friends;
+}
+
+void shortestPath(Person A, Person B) {
+    // BFS from A to B
+}
+
+This scales pretty well if you store it as it looks, because you can always add more people to another server once that server is filled up but it doesn't scale well with relationships. Such is the case if you assign a server a letter or character for and that everyone that has a name with a first letter matching the servers letter can be stored on that server. That is one scheme of many though.
+
+Now the shortestPath would not be cheap. For one, you would have to do a lookup on every iteration/call because you have to get that persons friend list. One way to deal with this, is to have a dedicated server with a lot of CPU and memory power precompute the shortest paths and store that value.
+
+===============
+Case 2:
+===============
+
+class Person {
+    string name;
+}
+
+class Relationship {
+    Person A, B;
+}
+
+void shortestPath(Person A, Person B) {
+    // BFS from A to B
+}
+
+I think this can scale pretty well too when it comes to the Person. I don't think it scales very well when it comes to the relationships as well. Here is my thinking: have a table for Persons and have a many-to-many table for Relationships. Storing those relationships is a challenge of its own. First how would you setup a table like that to scale? Maybe you do a round robin insertion with the servers that have that information. So now when you do a search, you have to search all the servers. We know that insertion is fairly fast since the round robin finds the next server in O(1) time, but read, search and remove run in O(R/N) time where R is the number of relationships and N is the number of servers. It's O(R/N) because these servers run asynchronously of each other. This doesn't even account for the high usage that exist on these platforms. You may be able to circumvent this search issue with high usage by duplicating the relationship servers so that you have finite set of clusters of size C. So now create, removes, and updates have to happen on all clusters, but all reads can happen on one cluster. You can take this further and add a cache to speed up read operations.
+
+How would the shortPath function work? I would have a function that takes two Persons ID's and do a BFS from the first to the second person. Here I am assuming the two people exist and the ID's passed in are valid. If they weren't valid ID's you can simply do a read and see if they exist. 
+If there was no caching I would do this in the database language (lets say SQL). The only problem that I see with doing the BFS in in SQL is not having a HashSet datastructure for fast O(1) lookups. This is a concern because every time I go through somebody's list of friends I have to filter out the people I have already reviewed by checking the whole list of people I have already reviewed. This makes the shortestPath runtime O(RN^2) where R is the number of relationships and N is the number of people.

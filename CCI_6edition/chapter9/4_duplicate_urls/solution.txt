@@ -1,0 +1,8 @@
+You have 10 billion URLs. How do you detect the duplicate documents? In this case, assume "duplicate" means that the URLs are identical.
+
+
+To me this problem sounds like it's more about detecting duplicate strings in a list of 10 billion strings. 
+
+URL 1 - Doc 1
+URL 2 - Doc 2
+URL 3 - Doc 3
