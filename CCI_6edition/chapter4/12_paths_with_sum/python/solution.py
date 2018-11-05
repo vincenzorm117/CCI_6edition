@@ -73,7 +73,31 @@ class BST:
 
 	# def parent(self, node):
 	# def remove(self, data):
-		
+
+
+def pathsWithSumRecursive(node, sum):
+    def recurse(node, partialSums, sum):
+        # Handle null case
+        if node is None:
+            return 0
+        # Check current value against all possible paths from before
+        count = 0
+        for partialSum in partialSums:
+            if partialSum + node.value == sum:
+                count += 1
+        # Check the current value alone
+        if node.value == sum:
+            count += 1
+        # Add current value to history
+        for i in range(len(partialSums)):
+            partialSums[i] += node.value
+        partialSums.append(node.value)
+        # Get values from recurse
+        count += recurse(node.left, partialSums, sum)
+        count += recurse(node.right, partialSums, sum)
+        return count
+    # Run actual function
+    return recurse(node, [node.value], sum)
 
 def paths_with_sum(B, sum):
 	if B is None or B.empty():
