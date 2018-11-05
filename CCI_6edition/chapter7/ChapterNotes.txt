@@ -1,0 +1,15 @@
+Chapter 7 Notes:
+
+Make sure to represent everything with a class. The simple case are the objects being represented, the cards, cars, books, etc. Then you have the Deck or the Board which is a question of wether to represent them with a class or to just have a variable with the name deck or board encapsulated in a game container type class. 
+
+I think the more interesting case is having a class that joins two objects. For instance, when you have a parking garage, you can have a ticket join a car and a parking space, or in the case of the books you can have a card store the user and the book. This is very similar to the idea of a many-to-many table in a SQL database, it’s just in OOP code.
+
+These last two cases are important because they will determine the amount of coupling in the code. Less coupling the better.
+
+One thing I tended to forget was to include the operations that we’re involved with those data structures and focused more on the data structures. This is important because those operations are going to define wether your OOP design has good cohesion. The higher the cohesion the better.
+
+On another note, it’s important to utilize Enums and find when to use them as oppose to using inheritance. I think the deciding factor is wether the different objects are going to exhibit different behavior or wether they behave the same and just have a different property. For instance, the call center employees all had different operations so using sub-classes was more appropriate as oppose to the Othello game which each piece behaved the same, but each just had a different property.
+
+My last note is on handlers, handlers are a great example of the many-to-many data structure but that can serve as a store for a lot of information. In the case of the books, having a user handler is very effective in getting user info with different data. In that case, you see that the user handler wraps up all of that functionality and the handler can be moved around anywhere without having to worry about all of the functions it contains. This pattern works great in a service oriented system. One example of that is HTTP sessions and having a service that returns the user based on the session id.
+
+It’s important to think outside the box when designing programs because in practical cases there might be out fliers and those outliers have to be dealt with. For instance, the parking lot can fit not just cars but busses. This introduces the issue of how many spaces a vehicle takes up. In the case of the deck of the generic deck of cards, what if the cards are baseball cards? It’s important to note, that these cases are rare at best, but code that handles cases like these make the programmer look great.

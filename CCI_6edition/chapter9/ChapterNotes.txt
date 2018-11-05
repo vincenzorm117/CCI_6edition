@@ -1,0 +1,30 @@
+
+It is very important to keep in mind that there is no one "correct" approach and that the issues at hand that have to be dug for highlight what could be a good solution to the problem. To identify how to solve the problem, questions regarding who, what, when, where, how, why, and which should be asked. Once these questions are answers, a solution can be formulated. It doesn't end here though, several iterations of these questions and formulations have to be made until both parties are done. It is important to keep in mind that solutions have pros and cons because there is no one solution for everything, specially with problems like these.
+
+When answering these questions, it is vital to isolate the main issues that need to be solved. I say main issues because there can be more than one gotchas to the problem, and missing them can hurt a business relationship.
+
+
+Things to keep in mind:
+- Bandwidth
+- Latency
+- Throughput
+- Client Ease of Use
+- Ease ofr Ourselves
+- Flexibility for Future demands
+- Scalability and efficiency
+- Security
+- Consider advantages and disadvantages in general
+- Start with a simple or small example and then go big
+- Address wether you need to use multiple machines
+- If you need to store less information talk about how you might need to retrieve more. For instance the social network: store the friends ID and just look them up when you need their info.
+- When grouping data consider relationships in regard to the alphabet, numbers/metrics, physical region, etc
+- Ask if the program is used once or often. This can change the tone significantly.
+- If things are parallelized, make sure to consider wether some mechanisms/services are individualized, shared, or fragmented, and what costs and benefits come with each case
+- If joins are involved mention them explicitly and mention if they are expensive for the scenario or not.
+- Don't forget to try inconvenient or unconventional solutions like writing to a file.
+- MapReduce can be your friend here.
+- If there is a follow up question combat performance with more memory, or combat less memory with more performance.
+
+
+Some technical things:
+- If you talk about URLs make sure to consider the query string on URLs. They can point to the same page, but generate different content.
