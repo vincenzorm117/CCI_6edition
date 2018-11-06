@@ -75,6 +75,39 @@ class BST:
 	# def remove(self, data):
 
 
+
+def pathsWithSumBruteForceRecursive(node, sum):
+    def CountForNode(node, sum, currentSum):
+        if node is None:
+            return 0
+        totalPaths = 0
+        # Add current node value to current sum
+        currentSum += node.value
+        if currentSum == sum:
+            totalPaths += 1
+        
+        totalPaths += CountForNode(node.left, sum, currentSum)
+        totalPaths += CountForNode(node.right, sum, currentSum)
+        return totalPaths
+
+    pathCount = 0
+    queue = [node]
+    # Run loop until all nodes are processed
+    while 0 < len(queue):
+        currentNode = queue.pop()
+        if currentNode is None:
+            continue
+        # Get sum for node
+        pathCount += CountForNode(currentNode, sum, 0)
+        # Add left and right nodes to queue for processing
+        if currentNode.left is not None:
+            queue.append(currentNode.left)
+        if currentNode.right is not None:
+            queue.append(currentNode.right)
+    return pathCount
+
+
+
 def pathsWithSumRecursive(node, sum):
     def recurse(node, partialSums, sum):
         # Handle null case
@@ -95,9 +128,42 @@ def pathsWithSumRecursive(node, sum):
         # Get values from recurse
         count += recurse(node.left, partialSums, sum)
         count += recurse(node.right, partialSums, sum)
+        # Pop current node from the history for adjacent subtrees
+        partialSums.pop()
         return count
     # Run actual function
     return recurse(node, [node.value], sum)
+
+
+
+def pathsWithSumRecursiveFastest(node, targetSum):
+    def recurse(node, hashMap, runningSum, targetSum):
+        # Handle null case
+        if node is None:
+            return 0
+        # Calculate running sum
+        runningSum += node.value
+        # Find complements of runningSum on sum
+        complementSum = targetSum - runningSum
+        totalPaths = 0
+        if complementSum in hashMap:
+            totalPaths += hashMap[complementSum]
+        # Insert current running sum to hash map
+        if runningSum in hashMap:
+            hashMap[runningSum] += 1
+        else:
+            hashMap[runningSum] = 1
+        # Recurse
+        totalPaths += recurse(node.left, hashMap, runningSum, targetSum)
+        totalPaths += recurse(node.right, hashMap, runningSum, targetSum)
+        # Undo hashmap insertion for adjacent trees
+        hashMap[runningSum] += 1
+        # return total paths
+        return totalPaths
+    # Run actual function
+    return recurse(node, {}, 0, targetSum)
+
+
 
 def paths_with_sum(B, sum):
 	if B is None or B.empty():
