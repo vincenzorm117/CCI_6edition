@@ -1,0 +1,7 @@
+QUESTION: Imagine you have a 20 GB file with one string per line. Explain how you would sort the file.
+
+First I want to clarify some assumptions. I am assuming that one string per line could be anything, but that each line is compared to each other line alpha numerically according to the conventional string comparator in the respective programming language.
+
+I would essentially do a merge sort of sorts on the file. I would sort continguous chunks of the file, lets say every 100MB so that there are 20GB/100MB = 200 sorted chunks in the file. I would sort these chunks by loading them into memory and doing a merge sort on them. Once all 200 chunks are sorted, I would then merge all chunks. I would merge the 2nd chunk with the first to make a cluster, I would then merge the 3rd chunk to the cluster and so on. I dont think there is a more efficient to merge them than this way, but I do think that other merging methods can be equally as efficient.
+
+This is called external sort.
