@@ -821,6 +821,29 @@ def print_grid(g):
 			print(g[y][x], end=" ")
 		print()
 
+
+def gcd(a,b):
+    if not isinstance(a, int) or not isinstance(b, int):
+        raise Exception('Arguments not ints')
+    if a > b:
+        a, b = b, a
+    while a != 0:
+        a, b = b % a, a
+    return b
+
+
+def lcm(a,b):
+    if not isinstance(a, int) or not isinstance(b, int):
+        raise Exception('Arguments not ints')
+    def gcd(a,b):
+        if a > b:
+            a, b = b, a
+        while a != 0:
+            a, b = b % a, a
+        return b
+    return int(a * b / gcd(a,b))
+
+
 ####################################################################################
 # Bitwise functions
 
