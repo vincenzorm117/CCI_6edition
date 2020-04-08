@@ -101,6 +101,10 @@ def subtract(a,b):
 def multiply(a,b):
     if a == 0 or b == 0:
         return 0
+    if a == 1:
+        return b
+    if b == 1:
+        return a
 
     argumentsHaveSameSign = sign(a) == sign(b)
     a, b = abs(a), abs(b)
