@@ -1,35 +1,13 @@
 #!/usr/local/bin/python3
 
-############################################################
-############################################################
-# Helpers
-
-# Based on the formula above and some algebra we
-# know the following to be true
-def hasSumSwap(A,B):
-    # Get sum of A
-    sumA = 0
-    for a in A:
-        sumA += a
-    # Get sum of B
-    sumB = 0
-    for b in B:
-        sumB += b
-    # Get diff of sums
-    return (sumA - sumB) % 2 == 0
-
 
 ############################################################
 ############################################################
 # Brute force solution
 
 def sumSwapBrute(A,B):
-    sumA = 0
-    for a in A:
-        sumA += a
-    sumB = 0
-    for b in B:
-        sumB += b
+    sumA = sum(A)
+    sumB = sum(B)
     for a in A:
         for b in B:
             if sumA - a + b == sumB - b + a:
