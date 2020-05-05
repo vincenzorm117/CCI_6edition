@@ -1,81 +1,44 @@
 #!/usr/local/bin/python3
 
 
-flatten = lambda l: [item for sublist in l for item in sublist]
+
+
+def parensBookSolutionIterative(count):
+    parenList = []
+    stack = [(count, count, '', 0)]
+    while 0 < len(stack):
+        leftRem, rightRem, currStr, index = stack.pop()
+
+        if leftRem < 0 or rightRem < 0 or leftRem > rightRem:
+            continue
+        elif leftRem == 0 and rightRem == 0:
+            parenList.append(currStr)
+        else:
+            stack.append((leftRem - 1, rightRem, currStr + '(', index+1))
+            stack.append((leftRem, rightRem - 1, currStr + ')', index+1))
+
+    return (count, len(parenList), parenList)
 
 
 
-class ParensIteratorWithSet:
+def parensBookSolutionRecursive(count):
 
-    def __init__(self):
-        self.currN = -1
-        self.currParens = ['']
+    def recurse(leftRem, rightRem, currStr, index):
+        if leftRem < 0 or rightRem < 0 or leftRem > rightRem:
+            return
+        elif leftRem == 0 and rightRem == 0:
+            parenList.append(''.join(currStr))
+        else:
+            currStr[index] = '('
+            recurse(leftRem - 1, rightRem, currStr, index+1)
+            currStr[index] = ')'
+            recurse(leftRem, rightRem - 1, currStr, index+1)
 
-    def hasNext(self):
-        return True
-
-    # @return (parenCount, answerCount, count)
-    def next(self):
-        self.currN += 1
-
-        if self.currN < 1:
-            return (self.currN, 0, [])
-
-        newParens = set()
-        for paren in self.currParens:
-            newParens.add('(%s)' % (paren))
-            newParens.add('()%s' % (paren))
-            newParens.add('%s()' % (paren))
-
-        self.currParens = list(newParens)
-        return (self.currN, len(self.currParens), self.currParens)
+    parenList = []
+    recurse(count, count, [None]*(count*2), 0)
+    return (count, len(parenList), parenList)
 
 
-
-
-class ParensIteratorWithFib:
-
-    def __init__(self):
-        self.currN = -1
-
-        self.currParens = [
-            ['((()))', '(()())'],
-            ['()(())', '()()()'],
-            ['(())()']
-        ]
-
-    def hasNext(self):
-        return True
-
-    # @return (parenCount, answerCount, count)
-    def next(self):
-        self.currN += 1
-
-        if self.currN < 3:
-            starts = [[], ['()'], ['(())', '()()']]
-            return (self.currN, len(starts[self.currN]), starts[self.currN])
-
-
-        if self.currN == 3:
-            parens = flatten(self.currParens)
-            return (self.currN, len(parens), parens)
-
-        allLastParens = flatten(self.currParens)
-        newCurrParens = [[],[],[]]
-        # Outer
-        for paren in allLastParens:
-            newCurrParens[0].append('(%s)' % (paren))
-        # Left
-        for paren in allLastParens:
-            newCurrParens[1].append('()%s' % (paren))
-        # Right
-        for paren in (self.currParens[0] + self.currParens[2]):
-            newCurrParens[2].append('%s()' % (paren))
-
-        self.currParens = newCurrParens
-
-        parens = flatten(self.currParens)
-        return (self.currN, len(parens), parens)
 
 
 def parenAnswersAreEqual(solFib, solSet):
@@ -94,12 +57,10 @@ def parenAnswersAreEqual(solFib, solSet):
     return len(solSetArraySet) == 0
 
 
-iteratorWithSet = ParensIteratorWithSet()
-iteratorWithFib = ParensIteratorWithFib()
-
 
 for i in range(50):
-    solFib = iteratorWithFib.next()
-    solSet = iteratorWithSet.next()
-    print(solFib[1], solSet[1])
-    assert(parenAnswersAreEqual(solFib, solSet))
+    solIter = parensBookSolutionIterative(i)
+    solRecur = parensBookSolutionRecursive(i)
+
+    print((solIter[0], solRecur[0]), (solIter[1], solRecur[1]))
+    assert(parenAnswersAreEqual(solRecur, solIter))
