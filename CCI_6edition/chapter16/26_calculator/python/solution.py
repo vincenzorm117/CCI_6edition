@@ -105,20 +105,21 @@ class Calculator:
                 else:
                     numberStack.append(number0 / number1)
 
-        # print(operatorStack)
-        # print(numberStack)
-        # print(self.location)
-        # print()
+        print(operatorStack)
+        print(numberStack)
+        print(self.location)
+        print()
 
-        while len(operatorStack) > 0:
-            number1, number0 = numberStack.pop(), numberStack.pop()
-            operator = operatorStack.pop()
+        result = numberStack[0]
+        for i in range(len(operatorStack)):
+            operator = operatorStack[i]
+            numberRight = numberStack[i+1]
             if operator == '+':
-                numberStack.append(number0 + number1)
+                result = result + numberRight
             else:
-                numberStack.append(number1 - number0)
+                result = result - numberRight
 
-        return numberStack.pop()
+        return result
 
 
 calc = Calculator()
@@ -144,6 +145,22 @@ testcases = [
     ('0*1', 0),
     ('1*1', 1),
     ('1000*.001', 1),
+    ('3+4+5', 12),
+    ('3+4*5', 23),
+    ('3+4/5', 3.8),
+    ('3*4+5', 17),
+    ('3*4*5', 60),
+    ('3*4/5', 2.4),
+    ('3/4+5', 5.75),
+    ('3/4*5', 3.75),
+    ('3/4/5', .15),
+    ('3+4-5', 2),
+    ('3-4+5', 4),
+    ('3-4-5', -6),
+    ('3-4*5', -17),
+    ('3-4/5', 2.2),
+    ('3*4-5', 7),
+    ('3/4-5', -4.25),
     # ERROR Cases
     # ('.1 + .1 + .1', .3), # Edge case that can't be handled
     # ('1.1.', 0),
