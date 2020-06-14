@@ -3,3 +3,5 @@ dist/
 *.out
 _resources
 *.class
+
+*.dSYM
