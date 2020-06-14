@@ -2,7 +2,6 @@
 
 class Calculator:
 
-
     def digitForChar(self, char):
         if char == '0': return 0
         if char == '1': return 1
@@ -81,21 +80,24 @@ class Calculator:
         operatorStack, numberStack = [], []
         numberStack.append(self.nextNum())
 
-        # print(operatorStack)
-        # print(numberStack)
-        # print(self.location)
-        # print()
-
         while self.hasNext():
             operator = self.nextOperator()
             number1 = self.nextNum()
 
-            # print(operatorStack)
-            # print(numberStack)
-            # print(self.location)
-            # print()
-
             if operator in '+-':
+                # Process previous addition/subtraction expression on stack
+                #   This is useful so that the stack doesn't inflate in size.
+                #   It can be argued that with the stack the memory size is
+                #   O(N), but this expression turns it into O(1)
+                if len(operatorStack) > 0:
+                    prevNumsRight = numberStack.pop()
+                    prevNumsLeft = numberStack.pop()
+                    prevOperator = operatorStack.pop()
+                    if prevOperator == '+':
+                        numberStack.append(prevNumsLeft + prevNumsRight)
+                    else:
+                        numberStack.append(prevNumsLeft - prevNumsRight)
+
                 operatorStack.append(operator)
                 numberStack.append(number1)
             else:
@@ -104,11 +106,6 @@ class Calculator:
                     numberStack.append(number0 * number1)
                 else:
                     numberStack.append(number0 / number1)
-
-        print(operatorStack)
-        print(numberStack)
-        print(self.location)
-        print()
 
         result = numberStack[0]
         for i in range(len(operatorStack)):
