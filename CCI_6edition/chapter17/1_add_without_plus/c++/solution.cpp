@@ -16,7 +16,7 @@ int shiftBitByLength(int bit, int position) {
 }
 
 
-int add(int a, int b) {
+int add_slow(int a, int b) {
     int aBit,
         bBit,
         currBit,
@@ -58,18 +58,27 @@ int add(int a, int b) {
     return result;
 }
 
+int add(int a, int b) {
+    while( b != 0 ) {
+        int sum = a ^ b;
+        int carry = (a & b) << 1;
+        a = sum;
+        b = carry;
+    }
+    return a;
+}
 
 int main() {
     int solution = -1;
-    for(int a = -10; a < 10; a++) {
-        for(int b = -10; b < 10; b++) {
+    for(int a = -100; a < 100; a++) {
+        for(int b = -100; b < 100; b++) {
             solution = add(a,b);
             assert(solution == (a+b));
             // Print results
             cout << a << " " << b << " " << (a+b) << " " << solution << endl;
-            cout << bitset<32>(a) << endl;
-            cout << bitset<32>(b) << endl;
-            cout << bitset<32>(solution) << endl;
+            // cout << bitset<32>(a) << endl;
+            // cout << bitset<32>(b) << endl;
+            // cout << bitset<32>(solution) << endl;
         }
     }
     return 0;
