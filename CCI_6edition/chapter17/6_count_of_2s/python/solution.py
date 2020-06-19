@@ -17,12 +17,12 @@ def twosCountBrute(num):
 # S4 = 3700
 # S5 = 46000
 
-A[1] = A[1e0] = 0
-A[10] = A[1e1] = 1
-A[100] = A[1e2] = 20
-A[1000] = A[1e3] = 300
-A[n] = n * 10^(n-1), for n s.t. some integer 0 <= m exists where 10^m = n
-
+# A[1] = A[1e0] = 0
+# A[10] = A[1e1] = 1
+# A[100] = A[1e2] = 20
+# A[1000] = A[1e3] = 300
+# A[n] = n * 10^(n-1),
+#     for n s.t. some integer 0 <= m exists where 10^m = n
 
 
 
