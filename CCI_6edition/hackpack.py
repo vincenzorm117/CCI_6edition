@@ -215,10 +215,10 @@ class Stack:
 
 	def isEmpty(self):
 		return self.top == 0
-	
+
 	def isFull(self):
 		return self.top == self.size
-	
+
 	def push(self, item):
 		if self.isFull():
 			self.items = self.items + [None] * self.size
@@ -226,14 +226,14 @@ class Stack:
 		self.items[self.top] = item
 		self.top += 1
 		self.count += 1
-	
+
 	def pop(self):
 		if self.isEmpty():
 			return None
 		self.top -= 1
 		self.count -= 1
 		return self.items[self.top]
-	
+
 	def peek(self):
 		if self.isEmpty():
 			return None
@@ -260,7 +260,7 @@ class Queue:
 
 	def isEmpty(self):
 		return self.count == 0
-	
+
 	def add(self, item):
 		self.count += 1
 		if self.head is None:
@@ -466,7 +466,7 @@ class BST:
 					return c
 				q.append(c.children[1])
 		return None
-		
+
 	def remove(self, data):
 		def maxSubtreeVal(root):
 			subtreeMax = (-2 ** 64, None)
@@ -480,7 +480,7 @@ class BST:
 					break
 				c = c.children[1]
 			return subtreeMax
-					
+
 
 		if self.root is None:
 			return None
@@ -526,6 +526,11 @@ class BST:
 ####################################################################################
 ####################################################################################
 
+
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
 
 
 class Graph():
@@ -609,7 +614,7 @@ def top_sort(G):
 					order.append(G.V[i])
 	order.reverse()
 	return order
-	
+
 
 
 ####################################################################################
@@ -638,7 +643,7 @@ def nCk(bag, k):
 			q.append((N, c[1]-1, i+1))
 	return chosen
 
-	
+
 def powerset(bag):
 	L = len(bag)
 	chosen = []
@@ -859,3 +864,80 @@ def hamming_distance(N):
 
 def power_of_2(N):
 	return (N & (N-1)) == 0
+
+
+
+
+####################################################################################
+# Binary search
+
+
+
+def binSearchClosestIndeces(array, value):
+    start, end = 0, len(array)-1
+
+    # swap start and end if they
+    #    are in opposite order
+    if start > end:
+        temp = start
+        start = end
+        end = temp
+
+    if start == end:
+        if array[start] < value:
+            return (start, None)
+        else:
+            return (None, start)
+
+
+    if value < array[start]:
+        return (None, start)
+
+    if value > array[end]:
+        return (end, None)
+
+
+    while True:
+        mid = int( (start + end) / 2)
+
+        if value < array[mid]:
+            end = mid
+        else:
+            start = mid
+
+        if start+1 == end:
+            return (start, end)
+
+def binSearchSubArrayClosestIndeces(array, start, end, value):
+
+    # swap start and end if they
+    #    are in opposite order
+    if start > end:
+        temp = start
+        start = end
+        end = temp
+
+    if start == end:
+        if array[start] < value:
+            return (start, None)
+        else:
+            return (None, start)
+
+
+    if value < array[start]:
+        return (None, start)
+
+    if value > array[end]:
+        return (end, None)
+
+
+    while True:
+        mid = int( (start + end) / 2)
+
+        if value < array[mid]:
+            end = mid
+        else:
+            start = mid
+
+        if start+1 == end:
+            return (start, end)
