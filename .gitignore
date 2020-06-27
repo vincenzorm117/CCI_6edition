@@ -5,3 +5,5 @@ _resources
 *.class
 
 *.dSYM
+
+.vscode
