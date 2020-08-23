@@ -57,7 +57,6 @@ def solution_optimized(short, long):
 
     # Calculate max
     minSizeIndeces = (currIndecesHeap[0], endIndex)
-    # minSizeValue = endIndex - currIndecesHeap[0] + 1
 
     while True:
         # Get next number to remove
@@ -74,9 +73,7 @@ def solution_optimized(short, long):
         endIndex = max(endIndex, nextIndex)
         # Update min
         minSizeIndeces = hGetMin(minSizeIndeces[0], minSizeIndeces[1], currIndecesHeap[0], endIndex)
-        # if (endIndex - currIndecesHeap[0] + 1) < minSizeValue:
-        #     minSizeValue = endIndex - currIndecesHeap[0] + 1
-        #     minSizeIndeces = (currIndecesHeap[0], endIndex)
+
     return minSizeIndeces
 
 
