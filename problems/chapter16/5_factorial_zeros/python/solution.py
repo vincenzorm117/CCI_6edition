@@ -1,5 +1,7 @@
 #!/usr/local/bin/python3
 
+from math import floor
+
 def log(b,x):
 	c = 0
 	while b <= x:
@@ -7,21 +9,36 @@ def log(b,x):
 		c += 1
 	return c
 
+def factorial_zeros3(N):
+    # if N is not int:
+    #     return None
+    if N < 0:
+        return 0
+    return floor(N/5)
 
-def factorial_zeros(x):
-	if x < 0:
+
+def factorial_zeros2(N):
+    if N < 0:
+        return None
+    sum = 0
+    for i in range(1,N+1):
+        sum += log(5,i)
+    return sum
+
+def factorial_zeros(N):
+	if N < 0:
 		return -1
 	count, i = 0, 5
-	while 0 < (x/i):
-		count += int(x / i)
+	while 0 < (N/i):
+		count += int(N / i)
 		i *= 5
 	return count
 
-def countZeros(x):
-	s = str(x)
+def countZeros(num):
+	numAsString = str(num)
 	count = 0
-	for c in range(len(s)-1,0, -1):
-		if s[c] != '0':
+	for i in range(len(numAsString)-1, -1, -1):
+		if numAsString[i] != '0':
 			break
 		count += 1
 	return count
