@@ -372,6 +372,134 @@ class BinaryTree:
 		return max+1
 
 
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+
+
+class Heap:
+    array = []
+
+    # Public Methods
+    def __init__(self, compareFn=None):
+        if compareFn == None:
+            self.compareFn = lambda x,y : x < y
+        else:
+            self.compareFn = compareFn
+
+    def Add(self, entry):
+        self.array.append(entry)
+        self.percolateUp()
+
+    def Peek(self):
+        if self.Length() <= 0:
+            return None
+        return self.array[0]
+
+    def Pop(self):
+        if self.Length() <= 0:
+            return None
+        if self.Length() == 1:
+            return self.array.pop()
+        top = self.array[0] # save top for return
+        self.array[0] = self.array.pop() # Move last to top
+        self.percolateDown()
+        return top
+
+    def Length(self):
+        return len(self.array)
+
+    # Private Methods
+
+    def getParentIndex(self, index):
+        if index % 2 == 0: # right child
+            return int(index / 2) - 1
+        else: # left child
+            return int(index / 2)
+
+    def hasParent(self, index):
+        return index > 0
+
+    def getLeftChild(self, index):
+        return index * 2 + 1
+
+    def getRightChild(self, index):
+        return index * 2 + 2
+
+    def swap(self, index0, index1):
+        self.array[index0], self.array[index1] = self.array[index1], self.array[index0]
+
+    def percolateUp(self):
+        index = self.Length() - 1
+        while self.hasParent(index):
+            parentIndex = self.getParentIndex(index)
+            if not self.compareFn(self.array[parentIndex], self.array[index]):
+                self.swap(parentIndex, index)
+            index = parentIndex
+
+    def percolateDown(self):
+        index = 0
+        while True:
+            leftIndex = self.getLeftChild(index)
+            rightIndex = self.getRightChild(index)
+
+            if 0 < leftIndex and leftIndex < self.Length():
+                if 0 < rightIndex and rightIndex < self.Length():
+                    if self.compareFn(self.array[leftIndex], self.array[rightIndex]):
+                        minIndex = leftIndex
+                    else:
+                        minIndex = rightIndex
+                else:
+                    minIndex = leftIndex
+            else:
+                minIndex = None
+
+            if minIndex == None:
+                break
+
+            if not self.compareFn(self.array[index], self.array[minIndex]):
+                self.swap(index, minIndex)
+                index = minIndex
+            else:
+                break
+
+
+####################################################################################
+####################################################################################
+####################################################################################
+####################################################################################
+
+class TrieNode:
+    def __init__(self, isWord):
+        self.map = {}
+        self.isWord = isWord
+
+    def hasNext(self, key):
+        return key in self.map
+
+    def next(self, key):
+        if self.hasNext(key):
+            return self.map[key]
+        else:
+            return None
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode(False)
+
+    def add(self, word):
+        currNode = self.root
+        for letter in word:
+            if letter in currNode.map:
+                currNode = currNode.map[letter]
+            else:
+                node = TrieNode(False)
+                currNode.map[letter] = node
+                currNode = node
+        currNode.isWord = True
+        return self
+
 
 ####################################################################################
 ####################################################################################
@@ -624,6 +752,66 @@ def top_sort(G):
 # Nice Functions
 
 ####################################################################################
+# Array functions
+
+def shuffleSubArray(array, start, end):
+    for i in range(start, end+1):
+        j = randint(i, end)
+        array[i], array[j] = array[j], array[i]
+    return array
+
+def shuffle(array):
+    for i in range(0, len(array)):
+        j = randint(i, len(array)-1)
+        array[i], array[j] = array[j], array[i]
+    return array
+
+
+
+####################################################################################
+# Sorting Functions and Helpers
+
+def swap(array, index0, index1):
+    array[index0], array[index1] = array[index1], array[index0]
+
+
+def partition(array, low, high):
+    if low >= high:
+        return high
+    # Partition all elements in range except pivot
+    pivot = array[low]
+    left = low+1
+    right = high
+    while left < right:
+        if array[left] < pivot:
+            left += 1
+        else:
+            swap(array, left, right)
+            right -= 1
+    # Move pivot into place
+    if array[left] < pivot:
+        swap(array, low, left)
+        return left
+    else:
+        swap(array, low, left-1)
+        return left-1
+
+
+
+def quicksort(array):
+    stack = [(0, len(array)-1)]
+    while len(stack) > 0:
+        low, high = stack.pop()
+        if low >= high:
+            continue
+        pivot = partition(array, low, high)
+        stack.append((low, pivot-1))
+        stack.append((pivot+1, high))
+    return array
+
+
+
+####################################################################################
 # Combinatorics Functions
 
 def nCk(bag, k):
@@ -700,6 +888,21 @@ def permute(l):
 				stack.append((c[0][:], c[1]+1))
 				c[0][c[1]], c[0][i] = c[0][i], c[0][c[1]]
 	return sols
+
+
+# Generator that can yield all possible permutations of arrays of
+#   size 0, 1, ... , largestSize with the alphabet.
+def generatePosibilities(largestSize, alphabet):
+    for size in range(largestSize + 1):
+        stack = [([], 0)]
+        while len(stack) > 0:
+            array, index = stack.pop()
+            if len(array) >= size:
+                yield array
+            else:
+                for item in alphabet:
+                    stack.append((array+[item], index+1))
+
 
 
 def permute_no_dups(l):
